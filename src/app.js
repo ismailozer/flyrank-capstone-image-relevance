@@ -1,6 +1,8 @@
 const express = require("express");
 const healthRouter = require("./routes/health");
 const imagesRouter = require("./routes/images");
+const jobsRouter =
+  require("./routes/jobs");
 
 const app = express();
 
@@ -15,6 +17,8 @@ app.use(
 app.use("/health", healthRouter);
 
 app.use("/images", imagesRouter);
+
+app.use("/jobs", jobsRouter);
 
 app.use((req, res) => {
   return res.status(404).json({

@@ -139,3 +139,58 @@ estimated_cost: 0.00282300
 ```
 
 The tenant also has an AI budget guard before model execution.
+
+## Background Image Processing
+
+Image analysis runs asynchronously through a PostgreSQL-backed background job.
+
+A request to:
+
+`POST /jobs/image-processing`
+
+returned immediately with a job reference while the worker processed the image separately.
+
+Observed worker execution:
+
+```text
+[worker] image processing worker started
+[worker] processing job 1
+[worker] image 3, attempt 1/3
+[worker] image 3 completed
+[worker] job 1 completed
+```
+
+Final job state:
+
+```text
+status: completed
+total_items: 1
+processed_items: 1
+failed_items: 0
+attempt_count: 1
+```
+
+## Idempotency
+
+The same batch request was submitted again with the same Idempotency-Key.
+
+Result:
+
+```text
+job_id: 1
+status: completed
+duplicate: True
+```
+
+The database still contained exactly one background job:
+
+```text
+id: 1
+job_type: image_processing
+status: completed
+idempotency_key: image-processing:1:fox-batch-001
+total_items: 1
+processed_items: 1
+```
+
+This proves that retrying the same batch request does not create duplicate work.
