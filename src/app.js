@@ -4,6 +4,9 @@ const imagesRouter = require("./routes/images");
 const jobsRouter =
   require("./routes/jobs");
 
+const postsRouter =
+  require("./routes/posts");
+
 const app = express();
 
 app.disable("x-powered-by");
@@ -15,10 +18,9 @@ app.use(
 );
 
 app.use("/health", healthRouter);
-
 app.use("/images", imagesRouter);
-
 app.use("/jobs", jobsRouter);
+app.use("/posts", postsRouter);
 
 app.use((req, res) => {
   return res.status(404).json({

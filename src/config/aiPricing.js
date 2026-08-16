@@ -3,6 +3,10 @@ const PRICING = {
     inputPerMillionUsd: 0.75,
     outputPerMillionUsd: 3.75,
   },
+
+  "gemini-embedding-001": {
+    inputPerMillionUsd: 0.15,
+  },
 };
 
 function calculateVisionCost({
@@ -35,7 +39,27 @@ function calculateVisionCost({
   );
 }
 
+function calculateEmbeddingCost({
+  model,
+  estimatedInputTokens,
+}) {
+  const pricing = PRICING[model];
+
+  if (!pricing) {
+    throw new Error(
+      `No pricing configuration exists for model: ${model}`
+    );
+  }
+
+  const cost =
+    (estimatedInputTokens / 1_000_000) *
+    pricing.inputPerMillionUsd;
+
+  return Number(cost.toFixed(8));
+}
+
 module.exports = {
   PRICING,
   calculateVisionCost,
+  calculateEmbeddingCost,
 };

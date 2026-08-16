@@ -11,7 +11,8 @@
     "db:seed": "node scripts/seed.js",
     "vision:test": "node scripts/testVision.js",
     "image:process": "node scripts/processImage.js",
-    "worker:image": "node workers/imageProcessingWorker.js"
+    "worker:image": "node workers/imageProcessingWorker.js",
+    "image:embed": "node scripts/embedImage.js"
   },
   "keywords": [],
   "author": "",

@@ -305,3 +305,47 @@ Because:
 0.70 < 0.75
 ```
 the application did not silently accept the classification.
+
+## Image Embeddings
+
+Validated image metadata was converted into semantic embeddings using
+`gemini-embedding-001`.
+
+Persisted vectors:
+
+```text
+image_id | model                | dimensions | vector_length
+---------+----------------------+------------+--------------
+3        | gemini-embedding-001 | 768        | 768
+4        | gemini-embedding-001 | 768        | 768
+5        | gemini-embedding-001 | 768        | 768
+```
+
+The low-confidence image was intentionally excluded:
+```
+Image 6 requires review and cannot be embedded automatically.
+```
+This prevents uncertain image classifications from entering the automatic recommendation index.
+
+## Semantic Image Ranking
+
+A post titled:
+
+`The Behavior of Red Foxes`
+
+was embedded and compared against the fox, wolf, and dog image embeddings.
+
+Observed cosine similarity ranking:
+
+```text
+rank | subject                  | similarity
+-----+--------------------------+-----------
+1    | red fox                  | 0.875515
+2    | black wolf               | 0.764005
+3    | black Labrador Retriever | 0.705375
+```
+
+The correct fox image ranked first above both the visually/semantically related wolf and the generic dog image.
+
+This also demonstrates why cosine similarity alone is insufficient:
+the wolf still received a relatively high score of 0.764005, so an explicit mismatch guard is required before a recommendation can be trusted.
