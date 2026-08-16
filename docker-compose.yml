@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: image-relevance-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: image_relevance
+    ports:
+      - "5434:5432"
+    volumes:
+      - image_relevance_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d image_relevance"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  image_relevance_pgdata:
