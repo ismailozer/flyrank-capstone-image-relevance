@@ -7,7 +7,10 @@ const jobsRouter =
 const postsRouter =
   require("./routes/posts");
 
-const app = express();
+const reviewsRouter =
+  require("./routes/reviews");
+
+  const app = express();
 
 app.disable("x-powered-by");
 
@@ -21,6 +24,7 @@ app.use("/health", healthRouter);
 app.use("/images", imagesRouter);
 app.use("/jobs", jobsRouter);
 app.use("/posts", postsRouter);
+app.use("/reviews", reviewsRouter);
 
 app.use((req, res) => {
   return res.status(404).json({

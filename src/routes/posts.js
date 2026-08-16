@@ -174,5 +174,68 @@ router.get(
   }
 );
 
+router.get(
+  "/:postId/images/:imageId/evaluate",
+  async (req, res, next) => {
+    try {
+      const postIdResult =
+        z.coerce
+          .number()
+          .int()
+          .positive()
+          .safeParse(
+            req.params.postId
+          );
+
+      const imageIdResult =
+        z.coerce
+          .number()
+          .int()
+          .positive()
+          .safeParse(
+            req.params.imageId
+          );
+
+      if (
+        !postIdResult.success ||
+        !imageIdResult.success
+      ) {
+        return res.status(400).json({
+          error:
+            "validation_error",
+        });
+      }
+
+      const result =
+        await rankImagesForPost(
+          postIdResult.data
+        );
+
+      const candidate =
+        result.candidates.find(
+          (item) =>
+            Number(item.imageId) ===
+            imageIdResult.data
+        );
+
+      if (!candidate) {
+        return res.status(404).json({
+          error:
+            "candidate_not_available",
+
+          message:
+            "The image is not eligible for automatic matching.",
+        });
+      }
+
+      return res.json({
+        post: result.post,
+        candidate,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;

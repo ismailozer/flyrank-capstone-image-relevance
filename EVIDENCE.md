@@ -349,3 +349,94 @@ The correct fox image ranked first above both the visually/semantically related 
 
 This also demonstrates why cosine similarity alone is insufficient:
 the wolf still received a relatively high score of 0.764005, so an explicit mismatch guard is required before a recommendation can be trusted.
+
+## Explainable Mismatch Guard
+
+The red-fox post produced the following semantic ranking:
+
+```text
+red fox                  0.875515
+black wolf               0.764005
+black Labrador Retriever 0.705375
+```
+The fox candidate was accepted:
+```
+decision: accepted
+similarity: 0.875515
+```
+The wolf candidate was rejected even though its semantic similarity (0.764005) was above the base similarity threshold (0.72):
+```
+decision: rejected
+decision_code: subject_mismatch
+reason: Subject mismatch: post explicitly targets "red fox",
+but the image subject is "black wolf".
+```
+A direct forced-candidate evaluation through:
+```
+GET /posts/1/images/4/evaluate
+```
+returned the same explainable rejection.
+
+This demonstrates that semantic similarity alone cannot override an explicit
+subject mismatch.
+
+## No-Confident-Match Behavior
+
+A deliberately unrelated post was created:
+
+`How Commercial Airplanes Generate Lift`
+
+The available image corpus contained only fox, wolf, and dog images.
+
+Observed result:
+
+```text
+status: no_confident_match
+bestMatch: null
+```
+Candidate scores:
+```
+black wolf               0.656699 → rejected
+red fox                  0.656260 → rejected
+black Labrador Retriever 0.644928 → rejected
+```
+All candidates were below the configured semantic similarity threshold of 0.72.
+
+The system therefore returned no recommendation instead of selecting the least-bad unrelated image.
+
+This demonstrates that the matching engine can explicitly return
+no_confident_match when the corpus does not contain a sufficiently relevant candidate.
+
+## Human Review Workflow
+
+Automatic image suggestions can be explicitly reviewed by a human.
+
+The accepted fox recommendation was manually approved:
+
+```text
+suggestion_id: 1
+image_id: 3
+automatic_decision: accepted
+human_action: approved
+similarity: 0.875515
+```
+Reviewer note:
+```
+Correct match. The post is specifically about red foxes and the selected
+image clearly depicts a red fox.
+```
+The rejected wolf recommendation was also manually reviewed:
+```
+suggestion_id: 2
+image_id: 4
+automatic_decision: rejected
+human_action: rejected
+similarity: 0.764005
+```
+Reviewer note:
+```
+The image depicts a wolf, while the post explicitly discusses red foxes.
+```
+Both reviews were persisted in PostgreSQL and remain available through the review API.
+
+This provides an auditable human-in-the-loop workflow on top of automatic matching decisions.
