@@ -108,9 +108,34 @@ async function analyzeImage({
     );
   }
 
-  return imageMetadataSchema.parse(
-    parsedOutput
-  );
+  const validatedMetadata =
+    imageMetadataSchema.parse(
+      parsedOutput
+    );
+
+  const usage = interaction.usage || {};
+
+  return {
+    metadata: validatedMetadata,
+
+    usage: {
+      inputTokens:
+        usage.total_input_tokens || 0,
+
+      outputTokens:
+        usage.total_output_tokens || 0,
+
+      thoughtTokens:
+        usage.total_thought_tokens || 0,
+
+      totalTokens:
+        usage.total_tokens || 0,
+    },
+
+    model:
+      process.env.VISION_MODEL ||
+      "gemini-3.6-flash",
+  };
 }
 
 module.exports = {

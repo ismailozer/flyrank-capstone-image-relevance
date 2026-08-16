@@ -109,3 +109,33 @@ The model output was accepted only after schema validation.
 Observed latency:
 
 `6278 ms`
+
+## AI Usage and Cost Tracking
+
+A real vision analysis call is attributed to the processed image and stored in PostgreSQL.
+
+Observed call:
+
+```yaml
+operation: vision_analysis
+entity_type: image
+entity_id: 3
+model: gemini-3.6-flash
+input_units: 1214
+output_units: 510
+estimated_cost_usd: 0.00282300
+latency_ms: 4632
+status: success
+```
+
+The output units include normal output tokens and reasoning/thought tokens.
+
+Tenant-level estimated spend:
+
+```yaml
+tenant_id: 1
+calls: 1
+estimated_cost: 0.00282300
+```
+
+The tenant also has an AI budget guard before model execution.

@@ -42,7 +42,25 @@ async function createTenant({
   return result.rows[0];
 }
 
+async function getTenantById(id) {
+  const result = await pool.query(
+    `
+      SELECT
+        id,
+        name,
+        ai_budget_usd,
+        created_at
+      FROM tenants
+      WHERE id = $1
+    `,
+    [id]
+  );
+
+  return result.rows[0] || null;
+}
+
 module.exports = {
   findTenantByName,
   createTenant,
+  getTenantById,
 };
