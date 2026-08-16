@@ -1,0 +1,171 @@
+{
+  "summary": {
+    "generatedAt": "2026-08-16T20:51:19.545Z",
+    "totalCases": 4,
+    "passedCases": 4,
+    "failedCases": 0,
+    "overallAccuracy": 1,
+    "top1": {
+      "correct": 3,
+      "total": 3,
+      "accuracy": 1
+    },
+    "noMatch": {
+      "correct": 1,
+      "total": 1,
+      "accuracy": 1
+    },
+    "averageWinningSimilarity": 0.863177,
+    "totalRejectedCandidates": 9
+  },
+  "cases": [
+    {
+      "name": "red-fox-positive",
+      "postId": "3",
+      "expectedOutcome": "match",
+      "expectedSubject": "red fox",
+      "actualStatus": "matched",
+      "actualBestSubject": "red fox",
+      "bestSimilarity": 0.874708,
+      "passed": true,
+      "candidates": [
+        {
+          "rank": 1,
+          "subject": "red fox",
+          "similarity": 0.874708,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 2,
+          "subject": "black wolf",
+          "similarity": 0.770369,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"black wolf\"."
+        },
+        {
+          "rank": 3,
+          "subject": "black Labrador Retriever",
+          "similarity": 0.705727,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"black Labrador Retriever\"."
+        }
+      ],
+      "rejectedCandidateCount": 2
+    },
+    {
+      "name": "black-wolf-positive",
+      "postId": "4",
+      "expectedOutcome": "match",
+      "expectedSubject": "black wolf",
+      "actualStatus": "matched",
+      "actualBestSubject": "black wolf",
+      "bestSimilarity": 0.872713,
+      "passed": true,
+      "candidates": [
+        {
+          "rank": 1,
+          "subject": "black wolf",
+          "similarity": 0.872713,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 2,
+          "subject": "red fox",
+          "similarity": 0.790139,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 3,
+          "subject": "black Labrador Retriever",
+          "similarity": 0.762878,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black wolf\", but the image subject is \"black Labrador Retriever\"."
+        }
+      ],
+      "rejectedCandidateCount": 2
+    },
+    {
+      "name": "labrador-positive",
+      "postId": "5",
+      "expectedOutcome": "match",
+      "expectedSubject": "black Labrador Retriever",
+      "actualStatus": "matched",
+      "actualBestSubject": "black Labrador Retriever",
+      "bestSimilarity": 0.842111,
+      "passed": true,
+      "candidates": [
+        {
+          "rank": 1,
+          "subject": "black Labrador Retriever",
+          "similarity": 0.842111,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 2,
+          "subject": "black wolf",
+          "similarity": 0.758839,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black Labrador Retriever\", but the image subject is \"black wolf\"."
+        },
+        {
+          "rank": 3,
+          "subject": "red fox",
+          "similarity": 0.713061,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black Labrador Retriever\", but the image subject is \"red fox\"."
+        }
+      ],
+      "rejectedCandidateCount": 2
+    },
+    {
+      "name": "airplane-negative",
+      "postId": "6",
+      "expectedOutcome": "no_confident_match",
+      "expectedSubject": null,
+      "actualStatus": "no_confident_match",
+      "actualBestSubject": null,
+      "bestSimilarity": null,
+      "passed": true,
+      "candidates": [
+        {
+          "rank": 1,
+          "subject": "red fox",
+          "similarity": 0.65739,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.657390 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 2,
+          "subject": "black wolf",
+          "similarity": 0.656334,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.656334 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 3,
+          "subject": "black Labrador Retriever",
+          "similarity": 0.639743,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.639743 is below the configured threshold 0.72."
+        }
+      ],
+      "rejectedCandidateCount": 3
+    }
+  ]
+}

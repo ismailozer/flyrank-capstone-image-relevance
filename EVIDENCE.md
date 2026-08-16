@@ -440,3 +440,40 @@ The image depicts a wolf, while the post explicitly discusses red foxes.
 Both reviews were persisted in PostgreSQL and remain available through the review API.
 
 This provides an auditable human-in-the-loop workflow on top of automatic matching decisions.
+
+## Automated Evaluation
+
+The matching pipeline was evaluated using a small labeled capstone corpus covering three positive matching cases and one explicit no-match case.
+
+Evaluation cases:
+
+```text
+red fox post       → expected: red fox
+black wolf post    → expected: black wolf
+Labrador post      → expected: black Labrador Retriever
+airplane post      → expected: no_confident_match
+```
+Observed results:
+```
+Passed: 4/4
+Overall accuracy: 100.00%
+
+Top-1:
+3/3 correct
+100.00%
+
+No-match:
+1/1 correct
+100.00%
+
+Average winning similarity:
+0.863177
+
+Guard rejections observed:
+9
+```
+The evaluation runner also writes detailed per-case evidence to:
+```
+docs/evaluation-results.json
+```
+The reported accuracy is specific to the included capstone evaluation corpus and is not presented as a general benchmark of model performance.

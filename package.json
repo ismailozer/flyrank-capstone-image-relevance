@@ -12,7 +12,8 @@
     "vision:test": "node scripts/testVision.js",
     "image:process": "node scripts/processImage.js",
     "worker:image": "node workers/imageProcessingWorker.js",
-    "image:embed": "node scripts/embedImage.js"
+    "image:embed": "node scripts/embedImage.js",
+    "eval": "node scripts/runEvaluation.js"
   },
   "keywords": [],
   "author": "",
