@@ -194,3 +194,114 @@ processed_items: 1
 ```
 
 This proves that retrying the same batch request does not create duplicate work.
+
+## Multi-Image Batch Processing
+
+A single background job successfully processed three semantically similar animal images.
+
+Observed worker execution:
+
+```text
+[worker] processing job 2
+[worker] image 3, attempt 1/3
+[worker] image 3 completed
+[worker] image 4, attempt 1/3
+[worker] image 4 completed
+[worker] image 5, attempt 1/3
+[worker] image 5 completed
+[worker] job 2 completed
+```
+
+Validated database results:
+
+```text
+fox_55.jpg | red fox                  | animal | 0.98 | processed
+wolf_1.jpg | black wolf               | animal | 0.95 | processed
+dog_8.jpg  | black Labrador Retriever | animal | 0.98 | processed
+```
+
+All images were processed asynchronously and stored with schema-valid structured metadata.
+
+## Background Job Retry and Failure Handling
+
+A controlled provider failure was introduced by configuring an invalid vision model.
+
+The worker retried the image three times:
+
+```text
+[worker] image 4, attempt 1/3
+[worker] image 4 failed: 404 Model 'invalid-test-model' not found
+[worker] job 3 will retry
+
+[worker] image 4, attempt 2/3
+[worker] image 4 failed: 404 Model 'invalid-test-model' not found
+[worker] job 3 will retry
+
+[worker] image 4, attempt 3/3
+[worker] image 4 failed: 404 Model 'invalid-test-model' not found
+```
+
+Final persisted state:
+
+```text
+job status: failed
+attempt_count: 3
+max_attempts: 3
+failed_items: 1
+
+item status: failed
+item attempt_count: 3
+item max_attempts: 3
+```
+
+Each failed model call was also recorded in ai_calls with:
+
+```text
+model: invalid-test-model
+status: failed
+error_message: provider 404
+```
+
+This proves that transient/background failures are retried up to the configured limit and then become visible permanent failures rather than disappearing silently.
+
+## Low-Confidence Classification Handling
+
+An intentionally ambiguous image was analyzed by the vision model.
+
+Validated output:
+
+```json
+{
+  "subject": "line drawing of an animal head",
+  "category": "animal",
+  "attributes": [
+    "black and white",
+    "line art",
+    "minimalist",
+    "pointed ears",
+    "ambiguous figure"
+  ],
+  "confidence": 0.7
+}
+```
+
+The first direct vision test returned a confidence score of `0.70`.
+
+When the same ambiguous image was processed through the production
+background pipeline, the persisted classification returned:
+
+```text
+confidence: 0.65
+needs_review: true
+processing_status: review_required
+```
+
+The configured confidence threshold is:
+```
+0.75
+```
+Because:
+```
+0.70 < 0.75
+```
+the application did not silently accept the classification.
