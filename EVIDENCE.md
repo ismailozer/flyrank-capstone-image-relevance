@@ -477,3 +477,33 @@ The evaluation runner also writes detailed per-case evidence to:
 docs/evaluation-results.json
 ```
 The reported accuracy is specific to the included capstone evaluation corpus and is not presented as a general benchmark of model performance.
+
+## Deterministic Unit Tests
+
+Core matching behavior is covered by deterministic unit tests that do not depend on live AI provider responses.
+
+Test coverage includes:
+
+- cosine similarity correctness
+- vector dimension validation
+- empty-vector rejection
+- plural subject normalization
+- correct subject acceptance
+- explicit subject mismatch rejection
+- low-confidence vision rejection
+- low semantic similarity rejection
+
+Observed result:
+
+```text
+tests: 10
+pass: 10
+fail: 0
+cancelled: 0
+skipped: 0
+```
+The test suite can be reproduced with:
+```
+npm test
+```
+This complements the live end-to-end evaluation with deterministic checks for the most important matching and safety rules.
