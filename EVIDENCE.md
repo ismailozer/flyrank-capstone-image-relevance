@@ -76,3 +76,36 @@ A second execution safely reuses the existing tenant:
   "message": "The requested endpoint does not exist."
 }
 ```
+
+## Structured Vision Output
+
+A real image was processed with Gemini and the returned JSON was validated against the application Zod schema.
+
+Test image:
+
+`fox_55.jpg`
+
+Validated result:
+
+```json
+{
+  "subject": "red fox",
+  "category": "animal",
+  "attributes": [
+    "reddish-orange fur",
+    "black lower legs",
+    "bushy tail",
+    "white chest and muzzle",
+    "pointed ears",
+    "snowy ground"
+  ],
+  "caption": "A red fox walks across a snow-covered ground in bright sunlight with a dark woodland background.",
+  "confidence": 0.98
+}
+```
+
+The model output was accepted only after schema validation.
+
+Observed latency:
+
+`6278 ms`
