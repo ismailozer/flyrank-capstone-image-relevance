@@ -10,3 +10,13 @@ Thumbs.db
 
 uploads/*
 !uploads/.gitkeep
+
+# Local image corpus - intentionally not committed
+dataset/demo/**
+!dataset/demo/.gitkeep
+
+# Re-generated ambiguity candidates
+dataset/ambiguous-candidates/
+
+# Local database backups
+local-backups/

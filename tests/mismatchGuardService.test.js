@@ -17,7 +17,7 @@ process.env.MATCH_STRONG_SIMILARITY_THRESHOLD =
   "0.80";
 
 process.env.VISION_CONFIDENCE_THRESHOLD =
-  "0.75";
+  "0.80";
 
 
 const foxPost = {
@@ -71,6 +71,63 @@ test(
     assert.deepEqual(
       subjects,
       ["red fox"]
+    );
+  }
+);
+
+test(
+  "duplicate known subjects are deduplicated in mismatch reason",
+  () => {
+    const knownSubjects = [
+      "red fox",
+      "red fox",
+      "red fox",
+      "red fox",
+      "black wolf",
+    ];
+
+    const subjects =
+      detectExpectedSubjects({
+        post: foxPost,
+        knownSubjects,
+      });
+
+    assert.deepEqual(
+      subjects,
+      ["red fox"]
+    );
+
+    const result =
+      evaluateCandidate({
+        post: foxPost,
+
+        candidate:
+          wolfCandidate,
+
+        similarity:
+          0.764005,
+
+        knownSubjects,
+      });
+
+    assert.equal(
+      result.decision,
+      "rejected"
+    );
+
+    assert.equal(
+      result.code,
+      "subject_mismatch"
+    );
+
+    assert.deepEqual(
+      result.expectedSubjects,
+      ["red fox"]
+    );
+
+    assert.equal(
+      result.reason,
+      'Subject mismatch: post explicitly targets "red fox", but the image subject is "black wolf".'
     );
   }
 );

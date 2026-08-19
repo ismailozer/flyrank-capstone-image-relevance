@@ -1,32 +1,45 @@
 const {
   getImageById,
-} = require("../repositories/imageRepository");
+} = require(
+  "../repositories/imageRepository"
+);
 
 const {
   saveImageAnalysis,
-} = require("../repositories/imageMetadataRepository");
+} = require(
+  "../repositories/imageMetadataRepository"
+);
 
 const {
   createAiCall,
-  getTenantEstimatedSpend,
-} = require("../repositories/aiCallRepository");
-
-const {
-  getTenantById,
-} = require("../repositories/tenantRepository");
+} = require(
+  "../repositories/aiCallRepository"
+);
 
 const {
   calculateVisionCost,
-} = require("../config/aiPricing");
+} = require(
+  "../config/aiPricing"
+);
+
+const {
+  assertAiBudgetAvailable,
+} = require(
+  "./aiBudgetService"
+);
 
 const {
   analyzeImage,
-} = require("./visionService");
+} = require(
+  "./visionService"
+);
+
 
 function getConfidenceThreshold() {
   const value = Number(
-    process.env.VISION_CONFIDENCE_THRESHOLD ||
-      0.75
+    process.env
+      .VISION_CONFIDENCE_THRESHOLD ||
+      0.80
   );
 
   if (
@@ -42,45 +55,59 @@ function getConfidenceThreshold() {
   return value;
 }
 
-async function assertBudgetAvailable(
-  tenantId
-) {
-  const tenant =
-    await getTenantById(tenantId);
 
-  if (!tenant) {
-    throw new Error(
-      `Tenant ${tenantId} does not exist.`
+async function logFailedVisionCall({
+  image,
+  startedAt,
+  error,
+}) {
+  const latencyMs =
+    Date.now() - startedAt;
+
+  await createAiCall({
+    tenantId:
+      image.tenant_id,
+
+    operation:
+      "vision_analysis",
+
+    entityType: "image",
+    entityId: image.id,
+
+    provider: "google",
+
+    model:
+      process.env.VISION_MODEL ||
+      "gemini-3.6-flash",
+
+    inputUnits: 0,
+    outputUnits: 0,
+
+    estimatedCostUsd: 0,
+
+    latencyMs,
+
+    status: "failed",
+
+    errorMessage:
+      error.message.slice(
+        0,
+        1000
+      ),
+  }).catch((logError) => {
+    console.error(
+      "[ai-cost] failed to log failed vision call:",
+      logError.message
     );
-  }
-
-  const currentSpend =
-    await getTenantEstimatedSpend(
-      tenantId
-    );
-
-  const budget = Number(
-    tenant.ai_budget_usd
-  );
-
-  if (currentSpend >= budget) {
-    throw new Error(
-      `AI budget exceeded for tenant ${tenantId}. ` +
-      `Current estimated spend: $${currentSpend.toFixed(
-        6
-      )}, budget: $${budget.toFixed(2)}`
-    );
-  }
-
-  return {
-    currentSpend,
-    budget,
-  };
+  });
 }
+
 
 async function processImage(imageId) {
   const image =
-    await getImageById(imageId);
+    await getImageById(
+      imageId
+    );
 
   if (!image) {
     throw new Error(
@@ -88,142 +115,175 @@ async function processImage(imageId) {
     );
   }
 
+  /*
+   * Vision token usage is only known
+   * after the provider responds.
+   *
+   * This preflight therefore guarantees
+   * that a tenant which has already
+   * exhausted its budget cannot start
+   * another provider request.
+   */
   const budgetBefore =
-    await assertBudgetAvailable(
-      image.tenant_id
-    );
+    await assertAiBudgetAvailable({
+      tenantId:
+        image.tenant_id,
 
-  const startedAt = Date.now();
+      estimatedNextCostUsd: 0,
+    });
 
+  const providerStartedAt =
+    Date.now();
+
+  let visionResult;
+
+  /*
+   * Keep the provider call in its own
+   * try/catch.
+   *
+   * Database persistence failures after
+   * a successful provider response must
+   * not be logged as failed AI calls.
+   */
   try {
-    const visionResult =
+    visionResult =
       await analyzeImage({
-        filePath: image.file_path,
-        mimeType: image.mime_type,
+        filePath:
+          image.file_path,
+
+        mimeType:
+          image.mime_type,
       });
-
-    const latencyMs =
-      Date.now() - startedAt;
-
-    const {
-      metadata,
-      usage,
-      model,
-    } = visionResult;
-
-    const estimatedCostUsd =
-      calculateVisionCost({
-        model,
-        inputTokens:
-          usage.inputTokens,
-        outputTokens:
-          usage.outputTokens,
-        thoughtTokens:
-          usage.thoughtTokens,
-      });
-
-    const billableOutputUnits =
-      usage.outputTokens +
-      usage.thoughtTokens;
-
-    const aiCall =
-      await createAiCall({
-        tenantId: image.tenant_id,
-        operation:
-          "vision_analysis",
-        entityType: "image",
-        entityId: image.id,
-        provider: "google",
-        model,
-        inputUnits:
-          usage.inputTokens,
-        outputUnits:
-          billableOutputUnits,
-        estimatedCostUsd,
-        latencyMs,
-        status: "success",
-      });
-
-    const threshold =
-      getConfidenceThreshold();
-
-    const processingStatus =
-      metadata.confidence <
-      threshold
-        ? "review_required"
-        : "processed";
-
-    const savedAnalysis =
-      await saveImageAnalysis({
-        imageId: image.id,
-        metadata,
-        processingStatus,
-      });
-
-    return {
-      ...savedAnalysis,
-
-      confidenceThreshold:
-        threshold,
-
-      aiUsage: {
-        inputTokens:
-          usage.inputTokens,
-
-        outputTokens:
-          usage.outputTokens,
-
-        thoughtTokens:
-          usage.thoughtTokens,
-
-        totalTokens:
-          usage.totalTokens,
-
-        estimatedCostUsd,
-      },
-
-      aiCallId:
-        aiCall.id,
-
-      budget: {
-        before:
-          budgetBefore.currentSpend,
-
-        limit:
-          budgetBefore.budget,
-      },
-    };
   } catch (error) {
-    const latencyMs =
-      Date.now() - startedAt;
-
-    await createAiCall({
-      tenantId: image.tenant_id,
-      operation:
-        "vision_analysis",
-      entityType: "image",
-      entityId: image.id,
-      provider: "google",
-      model:
-        process.env.VISION_MODEL ||
-        "gemini-3.6-flash",
-      inputUnits: 0,
-      outputUnits: 0,
-      estimatedCostUsd: 0,
-      latencyMs,
-      status: "failed",
-      errorMessage:
-        error.message.slice(0, 1000),
-    }).catch((logError) => {
-      console.error(
-        "[ai-cost] failed to log failed AI call:",
-        logError.message
-      );
+    await logFailedVisionCall({
+      image,
+      startedAt:
+        providerStartedAt,
+      error,
     });
 
     throw error;
   }
+
+  const providerLatencyMs =
+    Date.now() -
+    providerStartedAt;
+
+  const {
+    metadata,
+    usage,
+    model,
+  } = visionResult;
+
+  const estimatedCostUsd =
+    calculateVisionCost({
+      model,
+
+      inputTokens:
+        usage.inputTokens,
+
+      outputTokens:
+        usage.outputTokens,
+
+      thoughtTokens:
+        usage.thoughtTokens,
+    });
+
+  const billableOutputUnits =
+    usage.outputTokens +
+    usage.thoughtTokens;
+
+  /*
+   * The provider call succeeded.
+   * Record that fact before performing
+   * downstream metadata persistence.
+   */
+  const aiCall =
+    await createAiCall({
+      tenantId:
+        image.tenant_id,
+
+      operation:
+        "vision_analysis",
+
+      entityType: "image",
+      entityId: image.id,
+
+      provider: "google",
+      model,
+
+      inputUnits:
+        usage.inputTokens,
+
+      outputUnits:
+        billableOutputUnits,
+
+      estimatedCostUsd,
+
+      latencyMs:
+        providerLatencyMs,
+
+      status: "success",
+    });
+
+  const threshold =
+    getConfidenceThreshold();
+
+  const processingStatus =
+    metadata.confidence <
+    threshold
+      ? "review_required"
+      : "processed";
+
+  const savedAnalysis =
+    await saveImageAnalysis({
+      imageId:
+        image.id,
+
+      metadata,
+
+      processingStatus,
+    });
+
+  return {
+    ...savedAnalysis,
+
+    confidenceThreshold:
+      threshold,
+
+    aiUsage: {
+      inputTokens:
+        usage.inputTokens,
+
+      outputTokens:
+        usage.outputTokens,
+
+      thoughtTokens:
+        usage.thoughtTokens,
+
+      totalTokens:
+        usage.totalTokens,
+
+      estimatedCostUsd,
+    },
+
+    aiCallId:
+      aiCall.id,
+
+    budget: {
+      before:
+        budgetBefore.currentSpend,
+
+      limit:
+        budgetBefore.budget,
+
+      estimatedAfter:
+        budgetBefore.currentSpend +
+        estimatedCostUsd,
+    },
+  };
 }
+
 
 module.exports = {
   processImage,

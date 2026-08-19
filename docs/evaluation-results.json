@@ -1,75 +1,407 @@
 {
   "summary": {
-    "generatedAt": "2026-08-16T20:51:19.545Z",
-    "totalCases": 4,
-    "passedCases": 4,
+    "generatedAt": "2026-08-19T13:06:30.158Z",
+    "totalCases": 8,
+    "positiveCases": 5,
+    "negativeCases": 3,
+    "passedCases": 8,
     "failedCases": 0,
     "overallAccuracy": 1,
     "top1": {
+      "correct": 5,
+      "predictedMatches": 5,
+      "positiveCases": 5,
+      "precision": 1,
+      "positiveRecall": 1
+    },
+    "noMatch": {
       "correct": 3,
       "total": 3,
       "accuracy": 1
     },
-    "noMatch": {
-      "correct": 1,
-      "total": 1,
-      "accuracy": 1
+    "predictionCounts": {
+      "matched": 5,
+      "abstained": 3,
+      "falsePositiveMatches": 0,
+      "falseAbstentions": 0
     },
-    "averageWinningSimilarity": 0.863177,
-    "totalRejectedCandidates": 9
+    "averageWinningSimilarity": 0.872841,
+    "totalRejectedCandidates": 305
   },
   "cases": [
     {
       "name": "red-fox-positive",
-      "postId": "3",
+      "postId": "19",
       "expectedOutcome": "match",
       "expectedSubject": "red fox",
       "actualStatus": "matched",
       "actualBestSubject": "red fox",
-      "bestSimilarity": 0.874708,
+      "bestSimilarity": 0.880492,
+      "correctTop1": true,
       "passed": true,
       "candidates": [
         {
           "rank": 1,
           "subject": "red fox",
-          "similarity": 0.874708,
+          "similarity": 0.880492,
           "decision": "accepted",
           "decisionCode": "accepted",
           "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
         },
         {
           "rank": 2,
-          "subject": "black wolf",
-          "similarity": 0.770369,
-          "decision": "rejected",
-          "decisionCode": "subject_mismatch",
-          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"black wolf\"."
+          "subject": "red fox",
+          "similarity": 0.878308,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
         },
         {
           "rank": 3,
-          "subject": "black Labrador Retriever",
-          "similarity": 0.705727,
+          "subject": "red fox",
+          "similarity": 0.857671,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 4,
+          "subject": "red fox",
+          "similarity": 0.857383,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 5,
+          "subject": "red fox",
+          "similarity": 0.855879,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 6,
+          "subject": "red fox",
+          "similarity": 0.853149,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 7,
+          "subject": "red fox",
+          "similarity": 0.851707,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 8,
+          "subject": "red fox",
+          "similarity": 0.849339,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 9,
+          "subject": "red fox",
+          "similarity": 0.846241,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 10,
+          "subject": "red fox",
+          "similarity": 0.843819,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 11,
+          "subject": "grey wolf",
+          "similarity": 0.795775,
           "decision": "rejected",
           "decisionCode": "subject_mismatch",
-          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"black Labrador Retriever\"."
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"grey wolf\"."
+        },
+        {
+          "rank": 12,
+          "subject": "female antelope",
+          "similarity": 0.78942,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"female antelope\"."
+        },
+        {
+          "rank": 13,
+          "subject": "wolfdog",
+          "similarity": 0.783402,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"wolfdog\"."
+        },
+        {
+          "rank": 14,
+          "subject": "brown bear",
+          "similarity": 0.77933,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 15,
+          "subject": "fallow deer",
+          "similarity": 0.775315,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"fallow deer\"."
+        },
+        {
+          "rank": 16,
+          "subject": "white-tailed deer",
+          "similarity": 0.774728,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 17,
+          "subject": "female deer",
+          "similarity": 0.772763,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"female deer\"."
+        },
+        {
+          "rank": 18,
+          "subject": "red deer stag",
+          "similarity": 0.771526,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 19,
+          "subject": "black and tan dog",
+          "similarity": 0.767965,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"black and tan dog\"."
+        },
+        {
+          "rank": 20,
+          "subject": "red deer stag",
+          "similarity": 0.76631,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 21,
+          "subject": "grey wolf",
+          "similarity": 0.766092,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"grey wolf\"."
+        },
+        {
+          "rank": 22,
+          "subject": "white-tailed deer",
+          "similarity": 0.765488,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 23,
+          "subject": "young stag",
+          "similarity": 0.765193,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"young stag\"."
+        },
+        {
+          "rank": 24,
+          "subject": "puppy",
+          "similarity": 0.759771,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 25,
+          "subject": "gray wolf",
+          "similarity": 0.758873,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"gray wolf\"."
+        },
+        {
+          "rank": 26,
+          "subject": "brown and white dog",
+          "similarity": 0.758054,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown and white dog\"."
+        },
+        {
+          "rank": 27,
+          "subject": "brown bear",
+          "similarity": 0.755921,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 28,
+          "subject": "brown bear",
+          "similarity": 0.755902,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 29,
+          "subject": "deer",
+          "similarity": 0.755493,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"deer\"."
+        },
+        {
+          "rank": 30,
+          "subject": "black and tan dog",
+          "similarity": 0.754857,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"black and tan dog\"."
+        },
+        {
+          "rank": 31,
+          "subject": "young male white-tailed deer",
+          "similarity": 0.754591,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"young male white-tailed deer\"."
+        },
+        {
+          "rank": 32,
+          "subject": "brown bear cub",
+          "similarity": 0.754486,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear cub\"."
+        },
+        {
+          "rank": 33,
+          "subject": "Golden Retriever",
+          "similarity": 0.754004,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"Golden Retriever\"."
+        },
+        {
+          "rank": 34,
+          "subject": "brown bear",
+          "similarity": 0.753669,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 35,
+          "subject": "Asian black bear",
+          "similarity": 0.752856,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"Asian black bear\"."
+        },
+        {
+          "rank": 36,
+          "subject": "brown bear",
+          "similarity": 0.748412,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 37,
+          "subject": "American black bear",
+          "similarity": 0.744171,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"American black bear\"."
+        },
+        {
+          "rank": 38,
+          "subject": "dog",
+          "similarity": 0.739743,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"dog\"."
+        },
+        {
+          "rank": 39,
+          "subject": "puppy",
+          "similarity": 0.73951,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 40,
+          "subject": "brown bear",
+          "similarity": 0.735226,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 41,
+          "subject": "white spitz dog",
+          "similarity": 0.730968,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"white spitz dog\"."
+        },
+        {
+          "rank": 42,
+          "subject": "puppy",
+          "similarity": 0.727924,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 43,
+          "subject": "black and white puppy",
+          "similarity": 0.725202,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"black and white puppy\"."
         }
       ],
-      "rejectedCandidateCount": 2
+      "rejectedCandidateCount": 33
     },
     {
-      "name": "black-wolf-positive",
-      "postId": "4",
+      "name": "red-fox-scientific-name-positive",
+      "postId": "20",
       "expectedOutcome": "match",
-      "expectedSubject": "black wolf",
+      "expectedSubject": "red fox",
       "actualStatus": "matched",
-      "actualBestSubject": "black wolf",
-      "bestSimilarity": 0.872713,
+      "actualBestSubject": "red fox",
+      "bestSimilarity": 0.865194,
+      "correctTop1": true,
       "passed": true,
       "candidates": [
         {
           "rank": 1,
-          "subject": "black wolf",
-          "similarity": 0.872713,
+          "subject": "red fox",
+          "similarity": 0.865194,
           "decision": "accepted",
           "decisionCode": "accepted",
           "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
@@ -77,95 +409,2489 @@
         {
           "rank": 2,
           "subject": "red fox",
-          "similarity": 0.790139,
-          "decision": "rejected",
-          "decisionCode": "subject_mismatch",
-          "reason": "Subject mismatch: post explicitly targets \"black wolf\", but the image subject is \"red fox\"."
+          "similarity": 0.86382,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
         },
         {
           "rank": 3,
-          "subject": "black Labrador Retriever",
-          "similarity": 0.762878,
+          "subject": "red fox",
+          "similarity": 0.853673,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 4,
+          "subject": "red fox",
+          "similarity": 0.851678,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 5,
+          "subject": "red fox",
+          "similarity": 0.851081,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 6,
+          "subject": "red fox",
+          "similarity": 0.84858,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 7,
+          "subject": "red fox",
+          "similarity": 0.846178,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 8,
+          "subject": "red fox",
+          "similarity": 0.845102,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 9,
+          "subject": "red fox",
+          "similarity": 0.840396,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 10,
+          "subject": "red fox",
+          "similarity": 0.835315,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 11,
+          "subject": "grey wolf",
+          "similarity": 0.811692,
           "decision": "rejected",
           "decisionCode": "subject_mismatch",
-          "reason": "Subject mismatch: post explicitly targets \"black wolf\", but the image subject is \"black Labrador Retriever\"."
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"grey wolf\"."
+        },
+        {
+          "rank": 12,
+          "subject": "grey wolf",
+          "similarity": 0.803062,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"grey wolf\"."
+        },
+        {
+          "rank": 13,
+          "subject": "wolfdog",
+          "similarity": 0.799609,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"wolfdog\"."
+        },
+        {
+          "rank": 14,
+          "subject": "white-tailed deer",
+          "similarity": 0.793912,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 15,
+          "subject": "female antelope",
+          "similarity": 0.793006,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"female antelope\"."
+        },
+        {
+          "rank": 16,
+          "subject": "gray wolf",
+          "similarity": 0.788832,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"gray wolf\"."
+        },
+        {
+          "rank": 17,
+          "subject": "puppy",
+          "similarity": 0.781515,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 18,
+          "subject": "female deer",
+          "similarity": 0.779876,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"female deer\"."
+        },
+        {
+          "rank": 19,
+          "subject": "black and tan dog",
+          "similarity": 0.779846,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"black and tan dog\"."
+        },
+        {
+          "rank": 20,
+          "subject": "Golden Retriever",
+          "similarity": 0.77511,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"Golden Retriever\"."
+        },
+        {
+          "rank": 21,
+          "subject": "young stag",
+          "similarity": 0.772359,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"young stag\"."
+        },
+        {
+          "rank": 22,
+          "subject": "fallow deer",
+          "similarity": 0.772131,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"fallow deer\"."
+        },
+        {
+          "rank": 23,
+          "subject": "brown bear cub",
+          "similarity": 0.770985,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"brown bear cub\"."
+        },
+        {
+          "rank": 24,
+          "subject": "brown bear",
+          "similarity": 0.768529,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 25,
+          "subject": "deer",
+          "similarity": 0.766758,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"deer\"."
+        },
+        {
+          "rank": 26,
+          "subject": "American black bear",
+          "similarity": 0.764744,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"American black bear\"."
+        },
+        {
+          "rank": 27,
+          "subject": "red deer stag",
+          "similarity": 0.764668,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 28,
+          "subject": "dog",
+          "similarity": 0.76362,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"dog\"."
+        },
+        {
+          "rank": 29,
+          "subject": "brown bear",
+          "similarity": 0.762813,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 30,
+          "subject": "brown bear",
+          "similarity": 0.7626,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 31,
+          "subject": "white-tailed deer",
+          "similarity": 0.762283,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 32,
+          "subject": "brown and white dog",
+          "similarity": 0.761611,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"brown and white dog\"."
+        },
+        {
+          "rank": 33,
+          "subject": "black and tan dog",
+          "similarity": 0.761352,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"black and tan dog\"."
+        },
+        {
+          "rank": 34,
+          "subject": "puppy",
+          "similarity": 0.759472,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 35,
+          "subject": "red deer stag",
+          "similarity": 0.758186,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 36,
+          "subject": "brown bear",
+          "similarity": 0.756193,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 37,
+          "subject": "young male white-tailed deer",
+          "similarity": 0.755658,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"young male white-tailed deer\"."
+        },
+        {
+          "rank": 38,
+          "subject": "brown bear",
+          "similarity": 0.753269,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 39,
+          "subject": "puppy",
+          "similarity": 0.751379,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 40,
+          "subject": "brown bear",
+          "similarity": 0.751329,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 41,
+          "subject": "Asian black bear",
+          "similarity": 0.747714,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"Asian black bear\"."
+        },
+        {
+          "rank": 42,
+          "subject": "white spitz dog",
+          "similarity": 0.742149,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"white spitz dog\"."
+        },
+        {
+          "rank": 43,
+          "subject": "black and white puppy",
+          "similarity": 0.730954,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox\", but the image subject is \"black and white puppy\"."
         }
       ],
-      "rejectedCandidateCount": 2
+      "rejectedCandidateCount": 33
     },
     {
-      "name": "labrador-positive",
-      "postId": "5",
+      "name": "red-fox-snow-habitat-positive",
+      "postId": "21",
       "expectedOutcome": "match",
-      "expectedSubject": "black Labrador Retriever",
+      "expectedSubject": "red fox",
       "actualStatus": "matched",
-      "actualBestSubject": "black Labrador Retriever",
-      "bestSimilarity": 0.842111,
+      "actualBestSubject": "red fox",
+      "bestSimilarity": 0.924954,
+      "correctTop1": true,
       "passed": true,
       "candidates": [
         {
           "rank": 1,
-          "subject": "black Labrador Retriever",
-          "similarity": 0.842111,
+          "subject": "red fox",
+          "similarity": 0.924954,
           "decision": "accepted",
           "decisionCode": "accepted",
           "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
         },
         {
           "rank": 2,
-          "subject": "black wolf",
-          "similarity": 0.758839,
-          "decision": "rejected",
-          "decisionCode": "subject_mismatch",
-          "reason": "Subject mismatch: post explicitly targets \"black Labrador Retriever\", but the image subject is \"black wolf\"."
+          "subject": "red fox",
+          "similarity": 0.917552,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
         },
         {
           "rank": 3,
           "subject": "red fox",
-          "similarity": 0.713061,
+          "similarity": 0.890285,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 4,
+          "subject": "red fox",
+          "similarity": 0.882462,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 5,
+          "subject": "red fox",
+          "similarity": 0.868824,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 6,
+          "subject": "red fox",
+          "similarity": 0.863648,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 7,
+          "subject": "red fox",
+          "similarity": 0.863376,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 8,
+          "subject": "red fox",
+          "similarity": 0.862689,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 9,
+          "subject": "red fox",
+          "similarity": 0.861734,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 10,
+          "subject": "red fox",
+          "similarity": 0.857252,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 11,
+          "subject": "grey wolf",
+          "similarity": 0.833957,
           "decision": "rejected",
           "decisionCode": "subject_mismatch",
-          "reason": "Subject mismatch: post explicitly targets \"black Labrador Retriever\", but the image subject is \"red fox\"."
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"grey wolf\"."
+        },
+        {
+          "rank": 12,
+          "subject": "wolfdog",
+          "similarity": 0.7984,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"wolfdog\"."
+        },
+        {
+          "rank": 13,
+          "subject": "female antelope",
+          "similarity": 0.796048,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"female antelope\"."
+        },
+        {
+          "rank": 14,
+          "subject": "red deer stag",
+          "similarity": 0.792304,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 15,
+          "subject": "black and tan dog",
+          "similarity": 0.790212,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"black and tan dog\"."
+        },
+        {
+          "rank": 16,
+          "subject": "brown bear",
+          "similarity": 0.786087,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 17,
+          "subject": "female deer",
+          "similarity": 0.785385,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"female deer\"."
+        },
+        {
+          "rank": 18,
+          "subject": "grey wolf",
+          "similarity": 0.7839,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"grey wolf\"."
+        },
+        {
+          "rank": 19,
+          "subject": "gray wolf",
+          "similarity": 0.783546,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"gray wolf\"."
+        },
+        {
+          "rank": 20,
+          "subject": "Golden Retriever",
+          "similarity": 0.782401,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"Golden Retriever\"."
+        },
+        {
+          "rank": 21,
+          "subject": "white-tailed deer",
+          "similarity": 0.780021,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 22,
+          "subject": "young stag",
+          "similarity": 0.779331,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"young stag\"."
+        },
+        {
+          "rank": 23,
+          "subject": "fallow deer",
+          "similarity": 0.778032,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"fallow deer\"."
+        },
+        {
+          "rank": 24,
+          "subject": "puppy",
+          "similarity": 0.777411,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 25,
+          "subject": "brown and white dog",
+          "similarity": 0.774309,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown and white dog\"."
+        },
+        {
+          "rank": 26,
+          "subject": "red deer stag",
+          "similarity": 0.774004,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 27,
+          "subject": "dog",
+          "similarity": 0.77285,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"dog\"."
+        },
+        {
+          "rank": 28,
+          "subject": "white-tailed deer",
+          "similarity": 0.772178,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 29,
+          "subject": "brown bear",
+          "similarity": 0.771975,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 30,
+          "subject": "brown bear",
+          "similarity": 0.766623,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 31,
+          "subject": "American black bear",
+          "similarity": 0.765278,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"American black bear\"."
+        },
+        {
+          "rank": 32,
+          "subject": "brown bear cub",
+          "similarity": 0.764328,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear cub\"."
+        },
+        {
+          "rank": 33,
+          "subject": "black and tan dog",
+          "similarity": 0.762205,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"black and tan dog\"."
+        },
+        {
+          "rank": 34,
+          "subject": "puppy",
+          "similarity": 0.760165,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 35,
+          "subject": "brown bear",
+          "similarity": 0.760019,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 36,
+          "subject": "Asian black bear",
+          "similarity": 0.759961,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"Asian black bear\"."
+        },
+        {
+          "rank": 37,
+          "subject": "deer",
+          "similarity": 0.759571,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"deer\"."
+        },
+        {
+          "rank": 38,
+          "subject": "white spitz dog",
+          "similarity": 0.759491,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"white spitz dog\"."
+        },
+        {
+          "rank": 39,
+          "subject": "young male white-tailed deer",
+          "similarity": 0.757471,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"young male white-tailed deer\"."
+        },
+        {
+          "rank": 40,
+          "subject": "puppy",
+          "similarity": 0.757076,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 41,
+          "subject": "brown bear",
+          "similarity": 0.755675,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 42,
+          "subject": "brown bear",
+          "similarity": 0.755518,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 43,
+          "subject": "black and white puppy",
+          "similarity": 0.744537,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox, red fox\", but the image subject is \"black and white puppy\"."
         }
       ],
-      "rejectedCandidateCount": 2
+      "rejectedCandidateCount": 33
+    },
+    {
+      "name": "grey-wolf-positive",
+      "postId": "22",
+      "expectedOutcome": "match",
+      "expectedSubject": "grey wolf",
+      "actualStatus": "matched",
+      "actualBestSubject": "grey wolf",
+      "bestSimilarity": 0.868006,
+      "correctTop1": true,
+      "passed": true,
+      "candidates": [
+        {
+          "rank": 1,
+          "subject": "grey wolf",
+          "similarity": 0.868006,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 2,
+          "subject": "grey wolf",
+          "similarity": 0.861485,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 3,
+          "subject": "gray wolf",
+          "similarity": 0.854399,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 4,
+          "subject": "wolfdog",
+          "similarity": 0.847728,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"wolfdog\"."
+        },
+        {
+          "rank": 5,
+          "subject": "brown bear",
+          "similarity": 0.793949,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 6,
+          "subject": "white-tailed deer",
+          "similarity": 0.789918,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 7,
+          "subject": "red fox",
+          "similarity": 0.787933,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 8,
+          "subject": "brown bear",
+          "similarity": 0.787104,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 9,
+          "subject": "red fox",
+          "similarity": 0.7857,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 10,
+          "subject": "brown bear",
+          "similarity": 0.785424,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 11,
+          "subject": "brown bear",
+          "similarity": 0.785127,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 12,
+          "subject": "red fox",
+          "similarity": 0.783636,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 13,
+          "subject": "red fox",
+          "similarity": 0.782734,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 14,
+          "subject": "red fox",
+          "similarity": 0.782287,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 15,
+          "subject": "white-tailed deer",
+          "similarity": 0.781739,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 16,
+          "subject": "red fox",
+          "similarity": 0.781423,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 17,
+          "subject": "brown bear cub",
+          "similarity": 0.779229,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"brown bear cub\"."
+        },
+        {
+          "rank": 18,
+          "subject": "American black bear",
+          "similarity": 0.778873,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"American black bear\"."
+        },
+        {
+          "rank": 19,
+          "subject": "red fox",
+          "similarity": 0.777417,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 20,
+          "subject": "red fox",
+          "similarity": 0.775071,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 21,
+          "subject": "brown and white dog",
+          "similarity": 0.774792,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"brown and white dog\"."
+        },
+        {
+          "rank": 22,
+          "subject": "black and tan dog",
+          "similarity": 0.7745,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"black and tan dog\"."
+        },
+        {
+          "rank": 23,
+          "subject": "fallow deer",
+          "similarity": 0.774043,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"fallow deer\"."
+        },
+        {
+          "rank": 24,
+          "subject": "female antelope",
+          "similarity": 0.773999,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"female antelope\"."
+        },
+        {
+          "rank": 25,
+          "subject": "female deer",
+          "similarity": 0.773213,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"female deer\"."
+        },
+        {
+          "rank": 26,
+          "subject": "young stag",
+          "similarity": 0.772288,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"young stag\"."
+        },
+        {
+          "rank": 27,
+          "subject": "deer",
+          "similarity": 0.772129,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"deer\"."
+        },
+        {
+          "rank": 28,
+          "subject": "brown bear",
+          "similarity": 0.771629,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 29,
+          "subject": "red deer stag",
+          "similarity": 0.770691,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 30,
+          "subject": "brown bear",
+          "similarity": 0.770441,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 31,
+          "subject": "red fox",
+          "similarity": 0.770082,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 32,
+          "subject": "Asian black bear",
+          "similarity": 0.769752,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"Asian black bear\"."
+        },
+        {
+          "rank": 33,
+          "subject": "red deer stag",
+          "similarity": 0.768651,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 34,
+          "subject": "red fox",
+          "similarity": 0.768164,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 35,
+          "subject": "Golden Retriever",
+          "similarity": 0.762187,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"Golden Retriever\"."
+        },
+        {
+          "rank": 36,
+          "subject": "puppy",
+          "similarity": 0.759978,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 37,
+          "subject": "puppy",
+          "similarity": 0.756059,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 38,
+          "subject": "black and tan dog",
+          "similarity": 0.753897,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"black and tan dog\"."
+        },
+        {
+          "rank": 39,
+          "subject": "dog",
+          "similarity": 0.753664,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"dog\"."
+        },
+        {
+          "rank": 40,
+          "subject": "puppy",
+          "similarity": 0.751133,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 41,
+          "subject": "young male white-tailed deer",
+          "similarity": 0.746932,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"young male white-tailed deer\"."
+        },
+        {
+          "rank": 42,
+          "subject": "white spitz dog",
+          "similarity": 0.74315,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"white spitz dog\"."
+        },
+        {
+          "rank": 43,
+          "subject": "black and white puppy",
+          "similarity": 0.73023,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"grey wolf, grey wolf, gray wolf\", but the image subject is \"black and white puppy\"."
+        }
+      ],
+      "rejectedCandidateCount": 40
+    },
+    {
+      "name": "golden-retriever-positive",
+      "postId": "23",
+      "expectedOutcome": "match",
+      "expectedSubject": "Golden Retriever",
+      "actualStatus": "matched",
+      "actualBestSubject": "Golden Retriever",
+      "bestSimilarity": 0.825558,
+      "correctTop1": true,
+      "passed": true,
+      "candidates": [
+        {
+          "rank": 1,
+          "subject": "Golden Retriever",
+          "similarity": 0.825558,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 2,
+          "subject": "black and tan dog",
+          "similarity": 0.793887,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 3,
+          "subject": "black and tan dog",
+          "similarity": 0.782842,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 4,
+          "subject": "brown and white dog",
+          "similarity": 0.779652,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 5,
+          "subject": "puppy",
+          "similarity": 0.771941,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 6,
+          "subject": "wolfdog",
+          "similarity": 0.770408,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"wolfdog\"."
+        },
+        {
+          "rank": 7,
+          "subject": "black and white puppy",
+          "similarity": 0.759926,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"black and white puppy\"."
+        },
+        {
+          "rank": 8,
+          "subject": "white spitz dog",
+          "similarity": 0.759587,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 9,
+          "subject": "puppy",
+          "similarity": 0.755521,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 10,
+          "subject": "red fox",
+          "similarity": 0.754158,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 11,
+          "subject": "red fox",
+          "similarity": 0.753478,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 12,
+          "subject": "white-tailed deer",
+          "similarity": 0.751151,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 13,
+          "subject": "brown bear",
+          "similarity": 0.7475,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 14,
+          "subject": "grey wolf",
+          "similarity": 0.74614,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"grey wolf\"."
+        },
+        {
+          "rank": 15,
+          "subject": "red fox",
+          "similarity": 0.743478,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 16,
+          "subject": "red fox",
+          "similarity": 0.742953,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 17,
+          "subject": "dog",
+          "similarity": 0.742016,
+          "decision": "accepted",
+          "decisionCode": "accepted",
+          "reason": "Candidate passed subject consistency, vision confidence, and semantic similarity checks."
+        },
+        {
+          "rank": 18,
+          "subject": "gray wolf",
+          "similarity": 0.741635,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"gray wolf\"."
+        },
+        {
+          "rank": 19,
+          "subject": "fallow deer",
+          "similarity": 0.741473,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"fallow deer\"."
+        },
+        {
+          "rank": 20,
+          "subject": "brown bear",
+          "similarity": 0.740975,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 21,
+          "subject": "brown bear",
+          "similarity": 0.740393,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 22,
+          "subject": "Asian black bear",
+          "similarity": 0.736656,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"Asian black bear\"."
+        },
+        {
+          "rank": 23,
+          "subject": "puppy",
+          "similarity": 0.736324,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"puppy\"."
+        },
+        {
+          "rank": 24,
+          "subject": "brown bear cub",
+          "similarity": 0.735809,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"brown bear cub\"."
+        },
+        {
+          "rank": 25,
+          "subject": "brown bear",
+          "similarity": 0.734754,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 26,
+          "subject": "red fox",
+          "similarity": 0.733619,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 27,
+          "subject": "red fox",
+          "similarity": 0.732473,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 28,
+          "subject": "red fox",
+          "similarity": 0.732156,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 29,
+          "subject": "brown bear",
+          "similarity": 0.731978,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 30,
+          "subject": "red fox",
+          "similarity": 0.731664,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 31,
+          "subject": "white-tailed deer",
+          "similarity": 0.731558,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"white-tailed deer\"."
+        },
+        {
+          "rank": 32,
+          "subject": "grey wolf",
+          "similarity": 0.731397,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"grey wolf\"."
+        },
+        {
+          "rank": 33,
+          "subject": "brown bear",
+          "similarity": 0.730644,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"brown bear\"."
+        },
+        {
+          "rank": 34,
+          "subject": "red fox",
+          "similarity": 0.728289,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 35,
+          "subject": "female deer",
+          "similarity": 0.727485,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"female deer\"."
+        },
+        {
+          "rank": 36,
+          "subject": "red deer stag",
+          "similarity": 0.727027,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red deer stag\"."
+        },
+        {
+          "rank": 37,
+          "subject": "female antelope",
+          "similarity": 0.726787,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"female antelope\"."
+        },
+        {
+          "rank": 38,
+          "subject": "young stag",
+          "similarity": 0.72581,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"young stag\"."
+        },
+        {
+          "rank": 39,
+          "subject": "red fox",
+          "similarity": 0.71986,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red fox\"."
+        },
+        {
+          "rank": 40,
+          "subject": "American black bear",
+          "similarity": 0.717245,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"American black bear\"."
+        },
+        {
+          "rank": 41,
+          "subject": "deer",
+          "similarity": 0.717203,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"deer\"."
+        },
+        {
+          "rank": 42,
+          "subject": "young male white-tailed deer",
+          "similarity": 0.713146,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"young male white-tailed deer\"."
+        },
+        {
+          "rank": 43,
+          "subject": "red deer stag",
+          "similarity": 0.710349,
+          "decision": "rejected",
+          "decisionCode": "subject_mismatch",
+          "reason": "Subject mismatch: post explicitly targets \"black and tan dog, white spitz dog, dog, black and tan dog, brown and white dog, Golden Retriever\", but the image subject is \"red deer stag\"."
+        }
+      ],
+      "rejectedCandidateCount": 37
     },
     {
       "name": "airplane-negative",
-      "postId": "6",
+      "postId": "24",
       "expectedOutcome": "no_confident_match",
       "expectedSubject": null,
       "actualStatus": "no_confident_match",
       "actualBestSubject": null,
       "bestSimilarity": null,
+      "correctTop1": false,
       "passed": true,
       "candidates": [
         {
           "rank": 1,
-          "subject": "red fox",
-          "similarity": 0.65739,
+          "subject": "red deer stag",
+          "similarity": 0.669986,
           "decision": "rejected",
           "decisionCode": "low_similarity",
-          "reason": "Semantic similarity 0.657390 is below the configured threshold 0.72."
+          "reason": "Semantic similarity 0.669986 is below the configured threshold 0.72."
         },
         {
           "rank": 2,
-          "subject": "black wolf",
-          "similarity": 0.656334,
+          "subject": "red fox",
+          "similarity": 0.669634,
           "decision": "rejected",
           "decisionCode": "low_similarity",
-          "reason": "Semantic similarity 0.656334 is below the configured threshold 0.72."
+          "reason": "Semantic similarity 0.669634 is below the configured threshold 0.72."
         },
         {
           "rank": 3,
-          "subject": "black Labrador Retriever",
-          "similarity": 0.639743,
+          "subject": "dog",
+          "similarity": 0.668258,
           "decision": "rejected",
           "decisionCode": "low_similarity",
-          "reason": "Semantic similarity 0.639743 is below the configured threshold 0.72."
+          "reason": "Semantic similarity 0.668258 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 4,
+          "subject": "wolfdog",
+          "similarity": 0.661445,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.661445 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 5,
+          "subject": "white-tailed deer",
+          "similarity": 0.658985,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.658985 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 6,
+          "subject": "red fox",
+          "similarity": 0.656859,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.656859 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 7,
+          "subject": "grey wolf",
+          "similarity": 0.656505,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.656505 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 8,
+          "subject": "white spitz dog",
+          "similarity": 0.65583,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.655830 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 9,
+          "subject": "female antelope",
+          "similarity": 0.655605,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.655605 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 10,
+          "subject": "grey wolf",
+          "similarity": 0.655541,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.655541 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 11,
+          "subject": "brown and white dog",
+          "similarity": 0.655202,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.655202 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 12,
+          "subject": "Golden Retriever",
+          "similarity": 0.65519,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.655190 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 13,
+          "subject": "gray wolf",
+          "similarity": 0.654956,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.654956 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 14,
+          "subject": "Asian black bear",
+          "similarity": 0.653761,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.653761 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 15,
+          "subject": "red fox",
+          "similarity": 0.653454,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.653454 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 16,
+          "subject": "red fox",
+          "similarity": 0.653323,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.653323 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 17,
+          "subject": "black and tan dog",
+          "similarity": 0.65248,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.652480 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 18,
+          "subject": "white-tailed deer",
+          "similarity": 0.652282,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.652282 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 19,
+          "subject": "red fox",
+          "similarity": 0.65143,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.651430 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 20,
+          "subject": "red fox",
+          "similarity": 0.649965,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.649965 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 21,
+          "subject": "red fox",
+          "similarity": 0.649938,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.649938 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 22,
+          "subject": "red fox",
+          "similarity": 0.649168,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.649168 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 23,
+          "subject": "red fox",
+          "similarity": 0.648901,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.648901 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 24,
+          "subject": "red deer stag",
+          "similarity": 0.647998,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.647998 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 25,
+          "subject": "young stag",
+          "similarity": 0.647794,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.647794 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 26,
+          "subject": "American black bear",
+          "similarity": 0.647734,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.647734 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 27,
+          "subject": "brown bear",
+          "similarity": 0.64767,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.647670 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 28,
+          "subject": "black and tan dog",
+          "similarity": 0.647275,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.647275 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 29,
+          "subject": "brown bear",
+          "similarity": 0.646983,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.646983 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 30,
+          "subject": "red fox",
+          "similarity": 0.645783,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.645783 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 31,
+          "subject": "fallow deer",
+          "similarity": 0.644739,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.644739 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 32,
+          "subject": "female deer",
+          "similarity": 0.644052,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.644052 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 33,
+          "subject": "puppy",
+          "similarity": 0.64249,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.642490 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 34,
+          "subject": "brown bear",
+          "similarity": 0.640609,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.640609 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 35,
+          "subject": "brown bear",
+          "similarity": 0.638406,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.638406 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 36,
+          "subject": "black and white puppy",
+          "similarity": 0.638228,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.638228 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 37,
+          "subject": "deer",
+          "similarity": 0.638031,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.638031 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 38,
+          "subject": "brown bear",
+          "similarity": 0.637031,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.637031 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 39,
+          "subject": "young male white-tailed deer",
+          "similarity": 0.636523,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.636523 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 40,
+          "subject": "brown bear",
+          "similarity": 0.636467,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.636467 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 41,
+          "subject": "brown bear cub",
+          "similarity": 0.636113,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.636113 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 42,
+          "subject": "puppy",
+          "similarity": 0.626063,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.626063 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 43,
+          "subject": "puppy",
+          "similarity": 0.617281,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.617281 is below the configured threshold 0.72."
         }
       ],
-      "rejectedCandidateCount": 3
+      "rejectedCandidateCount": 43
+    },
+    {
+      "name": "database-negative",
+      "postId": "25",
+      "expectedOutcome": "no_confident_match",
+      "expectedSubject": null,
+      "actualStatus": "no_confident_match",
+      "actualBestSubject": null,
+      "bestSimilarity": null,
+      "correctTop1": false,
+      "passed": true,
+      "candidates": [
+        {
+          "rank": 1,
+          "subject": "white-tailed deer",
+          "similarity": 0.65966,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.659660 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 2,
+          "subject": "young stag",
+          "similarity": 0.659471,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.659471 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 3,
+          "subject": "female deer",
+          "similarity": 0.658046,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.658046 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 4,
+          "subject": "white-tailed deer",
+          "similarity": 0.657562,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.657562 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 5,
+          "subject": "red deer stag",
+          "similarity": 0.656147,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.656147 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 6,
+          "subject": "deer",
+          "similarity": 0.655915,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.655915 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 7,
+          "subject": "female antelope",
+          "similarity": 0.655201,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.655201 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 8,
+          "subject": "red deer stag",
+          "similarity": 0.653195,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.653195 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 9,
+          "subject": "brown bear cub",
+          "similarity": 0.65248,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.652480 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 10,
+          "subject": "red fox",
+          "similarity": 0.650837,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.650837 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 11,
+          "subject": "fallow deer",
+          "similarity": 0.649909,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.649909 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 12,
+          "subject": "brown bear",
+          "similarity": 0.649362,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.649362 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 13,
+          "subject": "Asian black bear",
+          "similarity": 0.646639,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.646639 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 14,
+          "subject": "brown bear",
+          "similarity": 0.646078,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.646078 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 15,
+          "subject": "wolfdog",
+          "similarity": 0.645768,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.645768 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 16,
+          "subject": "red fox",
+          "similarity": 0.644475,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.644475 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 17,
+          "subject": "red fox",
+          "similarity": 0.643885,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.643885 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 18,
+          "subject": "red fox",
+          "similarity": 0.64362,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.643620 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 19,
+          "subject": "black and tan dog",
+          "similarity": 0.643497,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.643497 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 20,
+          "subject": "young male white-tailed deer",
+          "similarity": 0.642657,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.642657 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 21,
+          "subject": "red fox",
+          "similarity": 0.642547,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.642547 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 22,
+          "subject": "brown bear",
+          "similarity": 0.6425,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.642500 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 23,
+          "subject": "brown bear",
+          "similarity": 0.642299,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.642299 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 24,
+          "subject": "American black bear",
+          "similarity": 0.641734,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.641734 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 25,
+          "subject": "red fox",
+          "similarity": 0.641392,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.641392 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 26,
+          "subject": "grey wolf",
+          "similarity": 0.639721,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.639721 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 27,
+          "subject": "black and tan dog",
+          "similarity": 0.639151,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.639151 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 28,
+          "subject": "dog",
+          "similarity": 0.638744,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.638744 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 29,
+          "subject": "gray wolf",
+          "similarity": 0.638697,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.638697 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 30,
+          "subject": "brown bear",
+          "similarity": 0.638519,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.638519 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 31,
+          "subject": "Golden Retriever",
+          "similarity": 0.637664,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.637664 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 32,
+          "subject": "red fox",
+          "similarity": 0.636655,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.636655 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 33,
+          "subject": "red fox",
+          "similarity": 0.635339,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.635339 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 34,
+          "subject": "white spitz dog",
+          "similarity": 0.635038,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.635038 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 35,
+          "subject": "grey wolf",
+          "similarity": 0.632493,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.632493 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 36,
+          "subject": "brown and white dog",
+          "similarity": 0.632201,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.632201 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 37,
+          "subject": "red fox",
+          "similarity": 0.631915,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.631915 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 38,
+          "subject": "black and white puppy",
+          "similarity": 0.630513,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.630513 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 39,
+          "subject": "brown bear",
+          "similarity": 0.626985,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.626985 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 40,
+          "subject": "puppy",
+          "similarity": 0.626738,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.626738 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 41,
+          "subject": "red fox",
+          "similarity": 0.626026,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.626026 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 42,
+          "subject": "puppy",
+          "similarity": 0.620901,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.620901 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 43,
+          "subject": "puppy",
+          "similarity": 0.615909,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.615909 is below the configured threshold 0.72."
+        }
+      ],
+      "rejectedCandidateCount": 43
+    },
+    {
+      "name": "astronomy-negative",
+      "postId": "26",
+      "expectedOutcome": "no_confident_match",
+      "expectedSubject": null,
+      "actualStatus": "no_confident_match",
+      "actualBestSubject": null,
+      "bestSimilarity": null,
+      "correctTop1": false,
+      "passed": true,
+      "candidates": [
+        {
+          "rank": 1,
+          "subject": "red deer stag",
+          "similarity": 0.694318,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.694318 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 2,
+          "subject": "white-tailed deer",
+          "similarity": 0.669773,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.669773 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 3,
+          "subject": "young stag",
+          "similarity": 0.665936,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.665936 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 4,
+          "subject": "red deer stag",
+          "similarity": 0.658362,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.658362 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 5,
+          "subject": "brown bear",
+          "similarity": 0.657806,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.657806 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 6,
+          "subject": "dog",
+          "similarity": 0.656923,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.656923 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 7,
+          "subject": "female deer",
+          "similarity": 0.655604,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.655604 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 8,
+          "subject": "brown bear cub",
+          "similarity": 0.654789,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.654789 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 9,
+          "subject": "white-tailed deer",
+          "similarity": 0.653936,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.653936 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 10,
+          "subject": "deer",
+          "similarity": 0.653487,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.653487 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 11,
+          "subject": "female antelope",
+          "similarity": 0.650672,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.650672 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 12,
+          "subject": "brown bear",
+          "similarity": 0.650263,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.650263 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 13,
+          "subject": "young male white-tailed deer",
+          "similarity": 0.649269,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.649269 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 14,
+          "subject": "Asian black bear",
+          "similarity": 0.646189,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.646189 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 15,
+          "subject": "puppy",
+          "similarity": 0.643801,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.643801 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 16,
+          "subject": "puppy",
+          "similarity": 0.643063,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.643063 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 17,
+          "subject": "grey wolf",
+          "similarity": 0.641545,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.641545 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 18,
+          "subject": "red fox",
+          "similarity": 0.641424,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.641424 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 19,
+          "subject": "fallow deer",
+          "similarity": 0.641402,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.641402 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 20,
+          "subject": "brown bear",
+          "similarity": 0.639974,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.639974 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 21,
+          "subject": "American black bear",
+          "similarity": 0.638852,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.638852 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 22,
+          "subject": "gray wolf",
+          "similarity": 0.638716,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.638716 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 23,
+          "subject": "red fox",
+          "similarity": 0.637938,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.637938 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 24,
+          "subject": "brown bear",
+          "similarity": 0.637909,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.637909 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 25,
+          "subject": "brown and white dog",
+          "similarity": 0.636326,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.636326 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 26,
+          "subject": "black and tan dog",
+          "similarity": 0.635874,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.635874 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 27,
+          "subject": "brown bear",
+          "similarity": 0.63524,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.635240 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 28,
+          "subject": "black and tan dog",
+          "similarity": 0.634253,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.634253 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 29,
+          "subject": "wolfdog",
+          "similarity": 0.633935,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.633935 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 30,
+          "subject": "black and white puppy",
+          "similarity": 0.629048,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.629048 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 31,
+          "subject": "brown bear",
+          "similarity": 0.627988,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.627988 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 32,
+          "subject": "white spitz dog",
+          "similarity": 0.626959,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.626959 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 33,
+          "subject": "red fox",
+          "similarity": 0.626099,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.626099 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 34,
+          "subject": "red fox",
+          "similarity": 0.62544,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.625440 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 35,
+          "subject": "red fox",
+          "similarity": 0.624816,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.624816 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 36,
+          "subject": "grey wolf",
+          "similarity": 0.623282,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.623282 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 37,
+          "subject": "red fox",
+          "similarity": 0.623212,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.623212 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 38,
+          "subject": "red fox",
+          "similarity": 0.622534,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.622534 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 39,
+          "subject": "puppy",
+          "similarity": 0.62085,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.620850 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 40,
+          "subject": "Golden Retriever",
+          "similarity": 0.616457,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.616457 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 41,
+          "subject": "red fox",
+          "similarity": 0.616262,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.616262 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 42,
+          "subject": "red fox",
+          "similarity": 0.61491,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.614910 is below the configured threshold 0.72."
+        },
+        {
+          "rank": 43,
+          "subject": "red fox",
+          "similarity": 0.614703,
+          "decision": "rejected",
+          "decisionCode": "low_similarity",
+          "reason": "Semantic similarity 0.614703 is below the configured threshold 0.72."
+        }
+      ],
+      "rejectedCandidateCount": 43
     }
   ]
 }

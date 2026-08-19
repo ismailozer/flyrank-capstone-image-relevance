@@ -38,6 +38,27 @@ function normalize(value) {
 }
 
 
+function isCorrectTop1Match({
+  expectedOutcome,
+  expectedSubject,
+  actualStatus,
+  actualBestSubject,
+}) {
+  if (
+    expectedOutcome !== "match"
+  ) {
+    return false;
+  }
+
+  return (
+    actualStatus === "matched" &&
+    actualBestSubject !== null &&
+    normalize(actualBestSubject) ===
+      normalize(expectedSubject)
+  );
+}
+
+
 async function evaluateCase(
   evaluationCase
 ) {
@@ -68,6 +89,23 @@ async function evaluateCase(
   const bestMatch =
     result.bestMatch;
 
+  const actualBestSubject =
+    bestMatch?.subject ?? null;
+
+  const correctTop1 =
+    isCorrectTop1Match({
+      expectedOutcome:
+        evaluationCase.expectedOutcome,
+
+      expectedSubject:
+        evaluationCase.expectedSubject,
+
+      actualStatus:
+        result.status,
+
+      actualBestSubject,
+    });
+
   let passed = false;
 
   if (
@@ -79,15 +117,7 @@ async function evaluateCase(
         "no_confident_match" &&
       bestMatch === null;
   } else {
-    passed =
-      result.status === "matched" &&
-      bestMatch !== null &&
-      normalize(
-        bestMatch.subject
-      ) ===
-        normalize(
-          evaluationCase.expectedSubject
-        );
+    passed = correctTop1;
   }
 
   const rejectedCandidates =
@@ -113,11 +143,12 @@ async function evaluateCase(
     actualStatus:
       result.status,
 
-    actualBestSubject:
-      bestMatch?.subject ?? null,
+    actualBestSubject,
 
     bestSimilarity:
       bestMatch?.similarity ?? null,
+
+    correctTop1,
 
     passed,
 
@@ -157,7 +188,7 @@ async function evaluateCase(
 
   console.log(
     `[eval] actual: ${
-      bestMatch?.subject ??
+      actualBestSubject ??
       result.status
     }`
   );
@@ -199,12 +230,14 @@ async function run() {
     results.push(result);
   }
 
+
   const positiveCases =
     results.filter(
       (result) =>
         result.expectedOutcome ===
         "match"
     );
+
 
   const negativeCases =
     results.filter(
@@ -213,11 +246,38 @@ async function run() {
         "no_confident_match"
     );
 
+
+  const matchedPredictions =
+    results.filter(
+      (result) =>
+        result.actualStatus ===
+        "matched" &&
+        result.actualBestSubject !==
+          null
+    );
+
+
+  const abstainedPredictions =
+    results.filter(
+      (result) =>
+        result.actualStatus ===
+        "no_confident_match"
+    );
+
+
   const top1Correct =
+    results.filter(
+      (result) =>
+        result.correctTop1
+    ).length;
+
+
+  const correctlyMatchedPositiveCases =
     positiveCases.filter(
       (result) =>
-        result.passed
+        result.correctTop1
     ).length;
+
 
   const noMatchCorrect =
     negativeCases.filter(
@@ -225,14 +285,64 @@ async function run() {
         result.passed
     ).length;
 
+
+  const falsePositiveMatches =
+    negativeCases.filter(
+      (result) =>
+        result.actualStatus ===
+        "matched"
+    ).length;
+
+
+  const falseAbstentions =
+    positiveCases.filter(
+      (result) =>
+        result.actualStatus ===
+        "no_confident_match"
+    ).length;
+
+
   const overallCorrect =
     results.filter(
       (result) =>
         result.passed
     ).length;
 
+
+  const top1Precision =
+    matchedPredictions.length > 0
+      ? top1Correct /
+        matchedPredictions.length
+      : null;
+
+
+  const positiveRecall =
+    positiveCases.length > 0
+      ? correctlyMatchedPositiveCases /
+        positiveCases.length
+      : null;
+
+
+  const noMatchAccuracy =
+    negativeCases.length > 0
+      ? noMatchCorrect /
+        negativeCases.length
+      : null;
+
+
+  const overallAccuracy =
+    results.length > 0
+      ? overallCorrect /
+        results.length
+      : 0;
+
+
   const similarities =
     positiveCases
+      .filter(
+        (result) =>
+          result.correctTop1
+      )
       .map(
         (result) =>
           result.bestSimilarity
@@ -242,14 +352,17 @@ async function run() {
           typeof value === "number"
       );
 
+
   const averageWinningSimilarity =
     similarities.length > 0
       ? similarities.reduce(
           (sum, value) =>
             sum + value,
           0
-        ) / similarities.length
+        ) /
+        similarities.length
       : 0;
+
 
   const totalRejectedCandidates =
     results.reduce(
@@ -259,12 +372,19 @@ async function run() {
       0
     );
 
+
   const summary = {
     generatedAt:
       new Date().toISOString(),
 
     totalCases:
       results.length,
+
+    positiveCases:
+      positiveCases.length,
+
+    negativeCases:
+      negativeCases.length,
 
     passedCases:
       overallCorrect,
@@ -275,26 +395,32 @@ async function run() {
 
     overallAccuracy:
       Number(
-        (
-          overallCorrect /
-          results.length
-        ).toFixed(4)
+        overallAccuracy.toFixed(4)
       ),
 
     top1: {
       correct:
         top1Correct,
 
-      total:
+      predictedMatches:
+        matchedPredictions.length,
+
+      positiveCases:
         positiveCases.length,
 
-      accuracy:
-        Number(
-          (
-            top1Correct /
-            positiveCases.length
-          ).toFixed(4)
-        ),
+      precision:
+        top1Precision === null
+          ? null
+          : Number(
+              top1Precision.toFixed(4)
+            ),
+
+      positiveRecall:
+        positiveRecall === null
+          ? null
+          : Number(
+              positiveRecall.toFixed(4)
+            ),
     },
 
     noMatch: {
@@ -305,14 +431,23 @@ async function run() {
         negativeCases.length,
 
       accuracy:
-        negativeCases.length > 0
-          ? Number(
-              (
-                noMatchCorrect /
-                negativeCases.length
-              ).toFixed(4)
-            )
-          : null,
+        noMatchAccuracy === null
+          ? null
+          : Number(
+              noMatchAccuracy.toFixed(4)
+            ),
+    },
+
+    predictionCounts: {
+      matched:
+        matchedPredictions.length,
+
+      abstained:
+        abstainedPredictions.length,
+
+      falsePositiveMatches,
+
+      falseAbstentions,
     },
 
     averageWinningSimilarity:
@@ -324,16 +459,19 @@ async function run() {
     totalRejectedCandidates,
   };
 
+
   const report = {
     summary,
     cases: results,
   };
+
 
   const outputDirectory =
     path.join(
       process.cwd(),
       "docs"
     );
+
 
   fs.mkdirSync(
     outputDirectory,
@@ -342,11 +480,13 @@ async function run() {
     }
   );
 
+
   const outputPath =
     path.join(
       outputDirectory,
       "evaluation-results.json"
     );
+
 
   fs.writeFileSync(
     outputPath,
@@ -357,6 +497,7 @@ async function run() {
     ),
     "utf8"
   );
+
 
   console.log(
     "\n======================================"
@@ -370,9 +511,11 @@ async function run() {
     "======================================"
   );
 
+
   console.log(
     `Passed: ${summary.passedCases}/${summary.totalCases}`
   );
+
 
   console.log(
     `Overall accuracy: ${(
@@ -380,11 +523,37 @@ async function run() {
     ).toFixed(2)}%`
   );
 
-  console.log(
-    `Top-1 accuracy: ${(
-      summary.top1.accuracy * 100
-    ).toFixed(2)}%`
-  );
+
+  if (
+    summary.top1.precision !==
+    null
+  ) {
+    console.log(
+      `Top-1 precision: ${(
+        summary.top1.precision *
+        100
+      ).toFixed(2)}%`
+    );
+  } else {
+    console.log(
+      "Top-1 precision: N/A"
+    );
+  }
+
+
+  if (
+    summary.top1.positiveRecall !==
+    null
+  ) {
+    console.log(
+      `Positive-query recall: ${(
+        summary.top1
+          .positiveRecall *
+        100
+      ).toFixed(2)}%`
+    );
+  }
+
 
   if (
     summary.noMatch.accuracy !==
@@ -398,17 +567,41 @@ async function run() {
     );
   }
 
+
+  console.log(
+    `Matched predictions: ${summary.predictionCounts.matched}`
+  );
+
+
+  console.log(
+    `Abstentions: ${summary.predictionCounts.abstained}`
+  );
+
+
+  console.log(
+    `False-positive matches: ${summary.predictionCounts.falsePositiveMatches}`
+  );
+
+
+  console.log(
+    `False abstentions: ${summary.predictionCounts.falseAbstentions}`
+  );
+
+
   console.log(
     `Average winning similarity: ${summary.averageWinningSimilarity}`
   );
+
 
   console.log(
     `Guard rejections observed: ${summary.totalRejectedCandidates}`
   );
 
+
   console.log(
     `\nReport written to: ${outputPath}`
   );
+
 
   if (
     summary.failedCases > 0

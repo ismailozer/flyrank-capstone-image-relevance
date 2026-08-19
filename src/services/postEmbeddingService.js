@@ -24,7 +24,12 @@ const {
 
 const {
   generateEmbedding,
+  estimateTokenCount,
 } = require("./embeddingService");
+
+const {
+  assertAiBudgetAvailable,
+} = require("./aiBudgetService");
 
 
 function buildPostEmbeddingText(post) {
@@ -32,6 +37,34 @@ function buildPostEmbeddingText(post) {
     `Title: ${post.title}`,
     `Content: ${post.body}`,
   ].join("\n");
+}
+
+
+function estimatePostEmbeddingRequest(
+  post
+) {
+  const text =
+    buildPostEmbeddingText(post);
+
+  const model =
+    process.env.EMBEDDING_MODEL ||
+    "gemini-embedding-001";
+
+  const estimatedInputTokens =
+    estimateTokenCount(text);
+
+  const estimatedCostUsd =
+    calculateEmbeddingCost({
+      model,
+      estimatedInputTokens,
+    });
+
+  return {
+    text,
+    model,
+    estimatedInputTokens,
+    estimatedCostUsd,
+  };
 }
 
 
@@ -47,14 +80,35 @@ async function generatePostEmbedding(
     );
   }
 
-  const text =
-    buildPostEmbeddingText(post);
+  const estimate =
+    estimatePostEmbeddingRequest(
+      post
+    );
+
+  /*
+   * Authoritative provider-call guard.
+   *
+   * Keep this outside the try/catch:
+   * a budget rejection is not a failed
+   * provider call and therefore must not
+   * create an ai_calls row.
+   */
+  const budgetBefore =
+    await assertAiBudgetAvailable({
+      tenantId:
+        post.tenant_id,
+
+      estimatedNextCostUsd:
+        estimate.estimatedCostUsd,
+    });
 
   const startedAt = Date.now();
 
   try {
     const embeddingResult =
-      await generateEmbedding(text);
+      await generateEmbedding(
+        estimate.text
+      );
 
     const estimatedCostUsd =
       calculateEmbeddingCost({
@@ -69,10 +123,13 @@ async function generatePostEmbedding(
     const saved =
       await savePostEmbedding({
         postId,
+
         model:
           embeddingResult.model,
+
         dimensions:
           embeddingResult.dimensions,
+
         embedding:
           embeddingResult.vector,
       });
@@ -85,10 +142,14 @@ async function generatePostEmbedding(
         operation:
           "post_embedding",
 
-        entityType: "post",
-        entityId: post.id,
+        entityType:
+          "post",
 
-        provider: "google",
+        entityId:
+          post.id,
+
+        provider:
+          "google",
 
         model:
           embeddingResult.model,
@@ -104,12 +165,15 @@ async function generatePostEmbedding(
         latencyMs:
           embeddingResult.latencyMs,
 
-        status: "success",
+        status:
+          "success",
       });
 
     return {
       postId,
-      embeddingId: saved.id,
+
+      embeddingId:
+        saved.id,
 
       model:
         embeddingResult.model,
@@ -121,6 +185,22 @@ async function generatePostEmbedding(
 
       aiCallId:
         aiCall.id,
+
+      budget: {
+        before:
+          budgetBefore.currentSpend,
+
+        estimatedNextCostUsd:
+          budgetBefore
+            .estimatedNextCostUsd,
+
+        projectedSpend:
+          budgetBefore
+            .projectedSpend,
+
+        limit:
+          budgetBefore.budget,
+      },
     };
   } catch (error) {
     const latencyMs =
@@ -133,10 +213,14 @@ async function generatePostEmbedding(
       operation:
         "post_embedding",
 
-      entityType: "post",
-      entityId: post.id,
+      entityType:
+        "post",
 
-      provider: "google",
+      entityId:
+        post.id,
+
+      provider:
+        "google",
 
       model:
         process.env
@@ -144,11 +228,15 @@ async function generatePostEmbedding(
         "gemini-embedding-001",
 
       inputUnits: 0,
+
       outputUnits: 0,
+
       estimatedCostUsd: 0,
+
       latencyMs,
 
-      status: "failed",
+      status:
+        "failed",
 
       errorMessage:
         error.message.slice(
@@ -161,7 +249,9 @@ async function generatePostEmbedding(
   }
 }
 
+
 module.exports = {
   generatePostEmbedding,
   buildPostEmbeddingText,
+  estimatePostEmbeddingRequest,
 };

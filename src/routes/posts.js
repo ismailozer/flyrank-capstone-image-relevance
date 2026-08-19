@@ -10,8 +10,15 @@ const {
 
 const {
   generatePostEmbedding,
+  estimatePostEmbeddingRequest,
 } = require(
   "../services/postEmbeddingService"
+);
+
+const {
+  assertAiBudgetAvailable,
+} = require(
+  "../services/aiBudgetService"
 );
 
 const {
@@ -68,6 +75,31 @@ router.post(
       const data =
         validation.data;
 
+      /*
+       * Preflight before persisting
+       * the post.
+       *
+       * This prevents a known budget
+       * rejection from leaving behind
+       * an orphan post.
+       */
+      const estimate =
+        estimatePostEmbeddingRequest({
+          title:
+            data.title,
+
+          body:
+            data.body,
+        });
+
+      await assertAiBudgetAvailable({
+        tenantId:
+          data.tenant_id,
+
+        estimatedNextCostUsd:
+          estimate.estimatedCostUsd,
+      });
+
       const post =
         await createPost({
           tenantId:
@@ -80,6 +112,12 @@ router.post(
             data.body,
         });
 
+      /*
+       * generatePostEmbedding performs
+       * another authoritative budget
+       * check immediately before the
+       * external provider call.
+       */
       const embedding =
         await generatePostEmbedding(
           post.id
@@ -160,6 +198,18 @@ router.get(
         });
       }
 
+      const post =
+        await getPostById(
+          parsed.data
+        );
+
+      if (!post) {
+        return res.status(404).json({
+          error:
+            "post_not_found",
+        });
+      }
+
       const result =
         await rankImagesForPost(
           parsed.data
@@ -173,6 +223,7 @@ router.get(
     }
   }
 );
+
 
 router.get(
   "/:postId/images/:imageId/evaluate",
@@ -206,6 +257,18 @@ router.get(
         });
       }
 
+      const post =
+        await getPostById(
+          postIdResult.data
+        );
+
+      if (!post) {
+        return res.status(404).json({
+          error:
+            "post_not_found",
+        });
+      }
+
       const result =
         await rankImagesForPost(
           postIdResult.data
@@ -229,7 +292,9 @@ router.get(
       }
 
       return res.json({
-        post: result.post,
+        post:
+          result.post,
+
         candidate,
       });
     } catch (error) {
@@ -237,5 +302,6 @@ router.get(
     }
   }
 );
+
 
 module.exports = router;

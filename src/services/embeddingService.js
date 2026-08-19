@@ -126,4 +126,5 @@ async function generateEmbedding(text) {
 module.exports = {
   generateEmbedding,
   normalizeVector,
+  estimateTokenCount,
 };

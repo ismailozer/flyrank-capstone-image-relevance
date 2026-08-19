@@ -29,8 +29,18 @@ const {
 );
 
 const {
+  assertAiBudgetAvailable,
+} = require(
+  "./aiBudgetService"
+);
+
+const {
   generateEmbedding,
-} = require("./embeddingService");
+  estimateTokenCount,
+} = require(
+  "./embeddingService"
+);
+
 
 function buildImageEmbeddingText(
   metadata
@@ -45,11 +55,59 @@ function buildImageEmbeddingText(
   ].join("\n");
 }
 
+
+async function logFailedEmbeddingCall({
+  image,
+  startedAt,
+  error,
+}) {
+  await createAiCall({
+    tenantId:
+      image.tenant_id,
+
+    operation:
+      "image_embedding",
+
+    entityType: "image",
+    entityId: image.id,
+
+    provider: "google",
+
+    model:
+      process.env.EMBEDDING_MODEL ||
+      "gemini-embedding-001",
+
+    inputUnits: 0,
+    outputUnits: 0,
+
+    estimatedCostUsd: 0,
+
+    latencyMs:
+      Date.now() - startedAt,
+
+    status: "failed",
+
+    errorMessage:
+      error.message.slice(
+        0,
+        1000
+      ),
+  }).catch((logError) => {
+    console.error(
+      "[ai-cost] failed to log failed image embedding call:",
+      logError.message
+    );
+  });
+}
+
+
 async function generateImageEmbedding(
   imageId
 ) {
   const image =
-    await getImageById(imageId);
+    await getImageById(
+      imageId
+    );
 
   if (!image) {
     throw new Error(
@@ -79,81 +137,73 @@ async function generateImageEmbedding(
       metadata
     );
 
-  const startedAt = Date.now();
+  const model =
+    process.env.EMBEDDING_MODEL ||
+    "gemini-embedding-001";
+
+  /*
+   * Embedding cost can be estimated
+   * before contacting the provider.
+   */
+  const estimatedInputTokens =
+    estimateTokenCount(
+      text
+    );
+
+  const estimatedNextCostUsd =
+    calculateEmbeddingCost({
+      model,
+
+      estimatedInputTokens,
+    });
+
+  const budgetBefore =
+    await assertAiBudgetAvailable({
+      tenantId:
+        image.tenant_id,
+
+      estimatedNextCostUsd,
+    });
+
+  const providerStartedAt =
+    Date.now();
+
+  let embeddingResult;
 
   try {
-    const embeddingResult =
-      await generateEmbedding(text);
+    embeddingResult =
+      await generateEmbedding(
+        text
+      );
+  } catch (error) {
+    await logFailedEmbeddingCall({
+      image,
 
-    const estimatedCostUsd =
-      calculateEmbeddingCost({
-        model:
-          embeddingResult.model,
+      startedAt:
+        providerStartedAt,
 
-        estimatedInputTokens:
-          embeddingResult
-            .estimatedInputTokens,
-      });
+      error,
+    });
 
-    const saved =
-      await saveImageEmbedding({
-        imageId,
-        model:
-          embeddingResult.model,
-        dimensions:
-          embeddingResult.dimensions,
-        embedding:
-          embeddingResult.vector,
-      });
+    throw error;
+  }
 
-    const aiCall =
-      await createAiCall({
-        tenantId:
-          image.tenant_id,
-
-        operation:
-          "image_embedding",
-
-        entityType: "image",
-        entityId: image.id,
-
-        provider: "google",
-
-        model:
-          embeddingResult.model,
-
-        inputUnits:
-          embeddingResult
-            .estimatedInputTokens,
-
-        outputUnits: 0,
-
-        estimatedCostUsd,
-
-        latencyMs:
-          embeddingResult.latencyMs,
-
-        status: "success",
-      });
-
-    return {
-      imageId,
-      embeddingId: saved.id,
+  const actualEstimatedCostUsd =
+    calculateEmbeddingCost({
       model:
         embeddingResult.model,
 
-      dimensions:
-        embeddingResult.dimensions,
+      estimatedInputTokens:
+        embeddingResult
+          .estimatedInputTokens,
+    });
 
-      estimatedCostUsd,
-
-      aiCallId:
-        aiCall.id,
-    };
-  } catch (error) {
-    const latencyMs =
-      Date.now() - startedAt;
-
+  /*
+   * Provider succeeded.
+   * Log the provider call before
+   * downstream persistence.
+   */
+  const aiCall =
     await createAiCall({
       tenantId:
         image.tenant_id,
@@ -167,26 +217,72 @@ async function generateImageEmbedding(
       provider: "google",
 
       model:
-        process.env
-          .EMBEDDING_MODEL ||
-        "gemini-embedding-001",
+        embeddingResult.model,
 
-      inputUnits: 0,
+      inputUnits:
+        embeddingResult
+          .estimatedInputTokens,
+
       outputUnits: 0,
-      estimatedCostUsd: 0,
-      latencyMs,
-      status: "failed",
 
-      errorMessage:
-        error.message.slice(
-          0,
-          1000
-        ),
-    }).catch(() => {});
+      estimatedCostUsd:
+        actualEstimatedCostUsd,
 
-    throw error;
-  }
+      latencyMs:
+        embeddingResult.latencyMs,
+
+      status: "success",
+    });
+
+  const saved =
+    await saveImageEmbedding({
+      imageId,
+
+      model:
+        embeddingResult.model,
+
+      dimensions:
+        embeddingResult.dimensions,
+
+      embedding:
+        embeddingResult.vector,
+    });
+
+  return {
+    imageId,
+
+    embeddingId:
+      saved.id,
+
+    model:
+      embeddingResult.model,
+
+    dimensions:
+      embeddingResult.dimensions,
+
+    estimatedCostUsd:
+      actualEstimatedCostUsd,
+
+    aiCallId:
+      aiCall.id,
+
+    budget: {
+      before:
+        budgetBefore.currentSpend,
+
+      limit:
+        budgetBefore.budget,
+
+      projectedBeforeCall:
+        budgetBefore.projectedSpend,
+
+      estimatedAfter:
+        budgetBefore.currentSpend +
+        actualEstimatedCostUsd,
+    },
+  };
 }
+
 
 module.exports = {
   generateImageEmbedding,

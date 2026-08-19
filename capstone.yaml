@@ -1,0 +1,32 @@
+run: "npm run capstone:run"
+seed: "npm run db:seed"
+test: "npm test"
+base_url: "http://localhost:3000"
+
+endpoints:
+  - method: GET
+    path: "/health"
+
+  - method: POST
+    path: "/images"
+
+  - method: POST
+    path: "/jobs/image-processing"
+
+  - method: GET
+    path: "/jobs/:id"
+
+  - method: POST
+    path: "/posts"
+
+  - method: GET
+    path: "/posts/:id/images"
+
+  - method: GET
+    path: "/posts/:postId/images/:imageId/evaluate"
+
+  - method: POST
+    path: "/reviews/suggestions/:id"
+
+  - method: GET
+    path: "/reviews/suggestions/:id"

@@ -17,6 +17,102 @@ const SUBJECT_MODIFIERS = new Set([
   "common",
 ]);
 
+const TAG_STOP_WORDS = new Set([
+  "a",
+  "an",
+  "the",
+  "and",
+  "or",
+  "of",
+  "in",
+  "on",
+  "at",
+  "to",
+  "for",
+  "with",
+  "from",
+  "by",
+  "is",
+  "are",
+  "was",
+  "were",
+  "be",
+  "been",
+  "being",
+  "this",
+  "that",
+  "these",
+  "those",
+  "it",
+  "its",
+  "as",
+]);
+
+
+// Words that must never be used to infer an explicit subject.
+//
+// Example:
+// "black and white line drawing of an animal head"
+//
+// should not match an unrelated post merely because the post
+// contains words such as "and", "of", or "animal".
+const SUBJECT_STOP_WORDS = new Set([
+  "a",
+  "an",
+  "the",
+  "and",
+  "or",
+  "of",
+  "in",
+  "on",
+  "at",
+  "to",
+  "for",
+  "from",
+  "with",
+  "without",
+  "by",
+  "as",
+  "is",
+  "are",
+  "was",
+  "were",
+  "be",
+  "been",
+  "being",
+  "this",
+  "that",
+  "these",
+  "those",
+
+  // Generic visual-description terms.
+  // These do not represent a specific semantic subject.
+  "image",
+  "photo",
+  "photograph",
+  "picture",
+  "drawing",
+  "line",
+  "sketch",
+  "illustration",
+  "figure",
+  "scene",
+
+  // Very broad object/category descriptions.
+  // They are too weak to infer that a post explicitly targets
+  // a particular image subject.
+  "animal",
+  "object",
+  "subject",
+  "head",
+]);
+
+const {
+  SUBJECT_ALIASES,
+} = require(
+  "../config/subjectAliases"
+);
+
 
 function normalizeWord(word) {
   let normalized = word
@@ -81,7 +177,8 @@ function getMeaningfulSubjectTokens(
 ) {
   return tokenize(subject).filter(
     (token) =>
-      !SUBJECT_MODIFIERS.has(token)
+      !SUBJECT_MODIFIERS.has(token) &&
+      !SUBJECT_STOP_WORDS.has(token)
   );
 }
 
@@ -105,19 +202,128 @@ function subjectIsMentioned(
   );
 }
 
+function normalizePhrase(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function deduplicateSubjects(
+  subjects
+) {
+  const uniqueSubjects =
+    new Map();
+
+  for (const subject of subjects) {
+    const normalized =
+      normalizePhrase(subject);
+
+    if (
+      normalized &&
+      !uniqueSubjects.has(
+        normalized
+      )
+    ) {
+      uniqueSubjects.set(
+        normalized,
+        subject
+      );
+    }
+  }
+
+  return [
+    ...uniqueSubjects.values(),
+  ];
+}
+
+
+function findAliasSubjects({
+  text,
+  knownSubjects,
+}) {
+  const normalizedText =
+    ` ${normalizePhrase(text)} `;
+
+  const matches = [];
+
+  for (
+    const {
+      alias,
+      canonical,
+    } of SUBJECT_ALIASES
+  ) {
+    const normalizedAlias =
+      normalizePhrase(alias);
+
+    if (
+      !normalizedText.includes(
+        ` ${normalizedAlias} `
+      )
+    ) {
+      continue;
+    }
+
+    const canonicalTokens =
+      getMeaningfulSubjectTokens(
+        canonical
+      );
+
+    const matchingKnownSubjects =
+      knownSubjects.filter(
+        (subject) => {
+          const subjectTokens =
+            getMeaningfulSubjectTokens(
+              subject
+            );
+
+          return canonicalTokens.every(
+            (token) =>
+              subjectTokens.includes(
+                token
+              )
+          );
+        }
+      );
+
+    matches.push(
+      ...matchingKnownSubjects
+    );
+  }
+
+  return [...new Set(matches)];
+}
 
 function detectExpectedSubjects({
   post,
   knownSubjects,
 }) {
+  const uniqueKnownSubjects =
+    deduplicateSubjects(
+      knownSubjects
+    );
+
+  const titleAliasMatches =
+    findAliasSubjects({
+      text: post.title,
+      knownSubjects:
+        uniqueKnownSubjects,
+    });
+
+  if (
+    titleAliasMatches.length > 0
+  ) {
+    return deduplicateSubjects(
+      titleAliasMatches
+    );
+  }
+
   const titleTokens =
     tokenize(post.title);
 
-  const bodyTokens =
-    tokenize(post.body);
-
   const titleMatches =
-    knownSubjects.filter(
+    uniqueKnownSubjects.filter(
       (subject) =>
         subjectIsMentioned(
           subject,
@@ -125,16 +331,43 @@ function detectExpectedSubjects({
         )
     );
 
-  if (titleMatches.length > 0) {
-    return titleMatches;
+  if (
+    titleMatches.length > 0
+  ) {
+    return deduplicateSubjects(
+      titleMatches
+    );
   }
 
-  return knownSubjects.filter(
-    (subject) =>
-      subjectIsMentioned(
-        subject,
-        bodyTokens
-      )
+  const bodyAliasMatches =
+    findAliasSubjects({
+      text: post.body,
+      knownSubjects:
+        uniqueKnownSubjects,
+    });
+
+  if (
+    bodyAliasMatches.length > 0
+  ) {
+    return deduplicateSubjects(
+      bodyAliasMatches
+    );
+  }
+
+  const bodyTokens =
+    tokenize(post.body);
+
+  const bodyMatches =
+    uniqueKnownSubjects.filter(
+      (subject) =>
+        subjectIsMentioned(
+          subject,
+          bodyTokens
+        )
+    );
+
+  return deduplicateSubjects(
+    bodyMatches
   );
 }
 
@@ -146,6 +379,9 @@ function calculateTagOverlap({
   const postTokens = new Set(
     tokenize(
       `${post.title} ${post.body}`
+    ).filter(
+      (token) =>
+        !TAG_STOP_WORDS.has(token)
     )
   );
 
@@ -156,7 +392,10 @@ function calculateTagOverlap({
   ].join(" ");
 
   const candidateTokens =
-    tokenize(candidateText);
+    tokenize(candidateText).filter(
+      (token) =>
+        !TAG_STOP_WORDS.has(token)
+    );
 
   const overlapping =
     candidateTokens.filter(
@@ -218,7 +457,7 @@ function evaluateCandidate({
   const confidenceThreshold =
     getThreshold(
       "VISION_CONFIDENCE_THRESHOLD",
-      0.75
+      0.80
     );
 
   const expectedSubjects =
@@ -233,6 +472,9 @@ function evaluateCandidate({
       candidate,
     });
 
+
+  // Guard 1:
+  // reject unreliable vision classifications.
   if (
     Number(candidate.confidence) <
     confidenceThreshold
@@ -253,6 +495,10 @@ function evaluateCandidate({
     };
   }
 
+
+  // Guard 2:
+  // if the post explicitly targets a known subject,
+  // the image must contain that subject.
   if (expectedSubjects.length > 0) {
     const candidateMatchesExpected =
       expectedSubjects.some(
@@ -296,6 +542,9 @@ function evaluateCandidate({
     }
   }
 
+
+  // Guard 3:
+  // reject candidates below the normal semantic threshold.
   if (
     similarity <
     similarityThreshold
@@ -317,6 +566,10 @@ function evaluateCandidate({
     };
   }
 
+
+  // Guard 4:
+  // If there is no explicitly identified subject and no
+  // lexical/tag evidence, demand stronger semantic similarity.
   if (
     expectedSubjects.length === 0 &&
     tagOverlap.count === 0 &&
@@ -340,6 +593,7 @@ function evaluateCandidate({
       tagOverlap,
     };
   }
+
 
   return {
     decision: "accepted",
